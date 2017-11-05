@@ -1,10 +1,10 @@
 <?php
 /**
- * YOURLS Link Creator - Admin Module
+ * REFR Shortlinks - Admin Module
  *
  * Contains admin related functions
  *
- * @package YOURLS Link Creator
+ * @package REFR Shortlinks
  */
 /*  Copyright 2015 Reaktiv Studios
 
@@ -102,7 +102,7 @@ class YOURLSCreator_Admin
 		}
 
 		// now add the meta box
-		add_meta_box( 'yourls-post-display', __( 'YOURLS Shortlink', 'wpyourls' ), array( __class__, 'yourls_post_display' ), $post->post_type, 'side', 'high' );
+		add_meta_box( 'yourls-post-display', __( 'YOURLS Shortlink', 'wprefr' ), array( __class__, 'yourls_post_display' ), $post->post_type, 'side', 'high' );
 	}
 
 	/**
@@ -287,7 +287,7 @@ class YOURLSCreator_Admin
 		}
 
 		// get display for column icon
-		$columns['yourls-click'] = '<span title="' . __( 'YOURLS Clicks', 'wpyourls' ) . '" class="dashicons dashicons-editor-unlink"></span>';
+		$columns['yourls-click'] = '<span title="' . __( 'YOURLS Clicks', 'wprefr' ) . '" class="dashicons dashicons-editor-unlink"></span>';
 
 		// return the columns
 		return $columns;

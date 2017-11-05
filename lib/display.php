@@ -1,10 +1,10 @@
 <?php
 /**
- * YOURLS Link Creator - Display Module
+ * REFR Shortlinks - Display Module
  *
  * Contains template tag and other display functions
  *
- * @package YOURLS Link Creator
+ * @package REFR Shortlinks
  */
 /*  Copyright 2015 Reaktiv Studios
 

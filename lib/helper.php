@@ -1,10 +1,10 @@
 <?php
 /**
- * YOURLS Link Creator - Helper Module
+ * REFR Shortlinks - Helper Module
  *
  * Contains various functions and whatnot
  *
- * @package YOURLS Link Creator
+ * @package REFR Shortlinks
  */
 /*  Copyright 2015 Reaktiv Studios
 
@@ -222,7 +222,7 @@ class YOURLSCreator_Helper
 			return array(
 				'success'   => false,
 				'errcode'   => 'MISSING_ACTION',
-				'message'   => __( 'No API action was provided.', 'wpyourls' )
+				'message'   => __( 'No API action was provided.', 'wprefr' )
 			);
 		}
 
@@ -231,7 +231,7 @@ class YOURLSCreator_Helper
 			return array(
 				'success'   => false,
 				'errcode'   => 'INVALID_ACTION',
-				'message'   => __( 'The API action was invalid.', 'wpyourls' )
+				'message'   => __( 'The API action was invalid.', 'wprefr' )
 			);
 		}
 
@@ -240,7 +240,7 @@ class YOURLSCreator_Helper
 			return array(
 				'success'   => false,
 				'errcode'   => 'NO_API_DATA',
-				'message'   => __( 'No data was returned from the API call.', 'wpyourls' )
+				'message'   => __( 'No data was returned from the API call.', 'wprefr' )
 			);
 		}
 
@@ -249,7 +249,7 @@ class YOURLSCreator_Helper
 			return array(
 				'success'   => false,
 				'errcode'   => 'INVALID_USER',
-				'message'   => __( 'The user requesting the URL does not have authorization.', 'wpyourls' )
+				'message'   => __( 'The user requesting the URL does not have authorization.', 'wprefr' )
 			);
 		}
 
@@ -278,7 +278,7 @@ class YOURLSCreator_Helper
 			return array(
 				'success'   => false,
 				'errcode'   => 'EMPTY_RESPONSE',
-				'message'   => __( 'The response from the API was empty.', 'wpyourls' )
+				'message'   => __( 'The response from the API was empty.', 'wprefr' )
 			);
 		}
 
@@ -299,7 +299,7 @@ class YOURLSCreator_Helper
 			return array(
 				'success'   => false,
 				'errcode'   => 'RESPONSE_CODE',
-				'message'   => sprintf( __( 'The API call returned a %s response code.', 'wpyourls' ), $code )
+				'message'   => sprintf( __( 'The API call returned a %s response code.', 'wprefr' ), $code )
 			);
 		}
 
@@ -311,7 +311,7 @@ class YOURLSCreator_Helper
 			return array(
 				'success'   => false,
 				'errcode'   => 'EMPTY_BODY',
-				'message'   => __( 'No data was present in the body from the API call.', 'wpyourls' )
+				'message'   => __( 'No data was present in the body from the API call.', 'wprefr' )
 			);
 		}
 
@@ -332,7 +332,7 @@ class YOURLSCreator_Helper
 			return array(
 				'success'   => false,
 				'errcode'   => 'EMPTY_JSON',
-				'message'   => __( 'The JSON could not be parsed.', 'wpyourls' )
+				'message'   => __( 'The JSON could not be parsed.', 'wprefr' )
 			);
 		}
 
@@ -437,7 +437,7 @@ class YOURLSCreator_Helper
 			return array(
 				'success'   => false,
 				'errcode'   => 'NO_DATA',
-				'message'   => __( 'No API data was returned.', 'wpyourls' )
+				'message'   => __( 'No API data was returned.', 'wprefr' )
 			);
 		}
 
@@ -577,11 +577,11 @@ class YOURLSCreator_Helper
 			$box   .= '<input id="yourls-keyw" class="yourls-keyw" size="20" type="text" name="yourls-keyw" value="' . esc_attr( $keywd ) . '" tabindex="501" />';
 
 			// simple instruction
-			$box   .= '<span class="description">' . __( 'optional keyword', 'wpyourls' ) . '</span>';
+			$box   .= '<span class="description">' . __( 'optional keyword', 'wprefr' ) . '</span>';
 
 		// first check our post status
 		if ( ! in_array( get_post_status( $post_id ), array( 'publish', 'future', 'pending' ) ) ) {
-			$box   .= '<p class="yourls-meta-block howto">' . __( 'a YOURLS link cannot be generated until the post is saved.', 'wpyourls' ) . '</p>';
+			$box   .= '<p class="yourls-meta-block howto">' . __( 'a YOURLS link cannot be generated until the post is saved.', 'wprefr' ) . '</p>';
 		} else {
 			$box   .= self::yourls_submit_box( $post_id );
 		}
@@ -608,7 +608,7 @@ class YOURLSCreator_Helper
 		$box   .= '<p class="yourls-meta-block yourls-submit-block">';
 
 			// button to actually fetch the link
-			$box   .= '<input type="button" class="button button-secondary button-small yourls-api" id="yourls-get" name="yourls-get" value="' . __( 'Create YOURLS link', 'wpyourls' ) . '" tabindex="502" data-nonce="' . esc_attr( $nonce ) . '" data-post-id="' . absint( $post_id ) . '" />';
+			$box   .= '<input type="button" class="button button-secondary button-small yourls-api" id="yourls-get" name="yourls-get" value="' . __( 'Create YOURLS link', 'wprefr' ) . '" tabindex="502" data-nonce="' . esc_attr( $nonce ) . '" data-post-id="' . absint( $post_id ) . '" />';
 
 			// the spinner
 			$box   .= '<span class="spinner yourls-spinner"></span>';
@@ -643,12 +643,12 @@ class YOURLSCreator_Helper
 
 			$box   .= '<input id="yourls-link" title="click to highlight" class="yourls-link-input" type="text" name="yourls-link" value="' . esc_url( $link ) . '" readonly="readonly" tabindex="501" onclick="this.focus();this.select()" />';
 
-			$box   .= '<span class="dashicons dashicons-no yourls-delete" title="' . __( 'Delete Link', 'wpyourls' ) . '" data-post-id="' . absint( $post_id ) . '" data-nonce="' . esc_attr( $nonce ) . '"></span>';
+			$box   .= '<span class="dashicons dashicons-no yourls-delete" title="' . __( 'Delete Link', 'wprefr' ) . '" data-post-id="' . absint( $post_id ) . '" data-nonce="' . esc_attr( $nonce ) . '"></span>';
 
 		$box   .= '</p>';
 
 		// the box with the counting
-		$box   .= '<p class="yourls-meta-block howto"> ' . sprintf( _n( 'Your YOURLS link has generated %d click.', 'Your YOURLS link has generated %d clicks.', absint( $count ), 'wpyourls' ), absint( $count ) ) .'</p>';
+		$box   .= '<p class="yourls-meta-block howto"> ' . sprintf( _n( 'Your YOURLS link has generated %d click.', 'Your YOURLS link has generated %d clicks.', absint( $count ), 'wprefr' ), absint( $count ) ) .'</p>';
 
 		// hidden field for the optional keyword
 		$box   .= '<input id="yourls-keyw" class="yourls-keyw" type="hidden" name="yourls-keyw" value="' . esc_attr( $keywd ) . '" />';
@@ -669,7 +669,7 @@ class YOURLSCreator_Helper
 		$nonce  = wp_create_nonce( 'yourls_inline_create_' . absint( $post_id ) );
 
 		// return the link
-		return '<a href="#" class="yourls-admin-row-link yourls-admin-create" data-nonce="' . esc_attr( $nonce ) . '" data-post-id="' . absint( $post_id ) . '">' . __( 'Create YOURLS', 'wpyourls' ) . '</a>';
+		return '<a href="#" class="yourls-admin-row-link yourls-admin-create" data-nonce="' . esc_attr( $nonce ) . '" data-post-id="' . absint( $post_id ) . '">' . __( 'Create YOURLS', 'wprefr' ) . '</a>';
 	}
 
 	/**
@@ -684,7 +684,7 @@ class YOURLSCreator_Helper
 		$nonce  = wp_create_nonce( 'yourls_inline_update_' . absint( $post_id ) );
 
 		// return the link
-		return '<a href="#" class="yourls-admin-row-link yourls-admin-update" data-nonce="' . esc_attr( $nonce ) . '" data-post-id="' . absint( $post_id ) . '">' . __( 'Update YOURLS', 'wpyourls' ) . '</a>';
+		return '<a href="#" class="yourls-admin-row-link yourls-admin-update" data-nonce="' . esc_attr( $nonce ) . '" data-post-id="' . absint( $post_id ) . '">' . __( 'Update YOURLS', 'wprefr' ) . '</a>';
 	}
 
 	/**
@@ -722,7 +722,7 @@ class YOURLSCreator_Helper
 		// set a default data aray
 		$data   = array(
 			'icon'  => '<span class="api-status-icon api-status-icon-unknown"></span>',
-			'text'  => __( 'The status of the YOURLS API could not be determined.', 'wpyourls' )
+			'text'  => __( 'The status of the YOURLS API could not be determined.', 'wprefr' )
 		);
 
 		// handle the success
@@ -731,7 +731,7 @@ class YOURLSCreator_Helper
 			// return the icon and text
 			$data   = array(
 				'icon'  => '<span class="api-status-icon api-status-icon-good"></span>',
-				'text'  => __( 'The YOURLS API is currently accessible.', 'wpyourls' )
+				'text'  => __( 'The YOURLS API is currently accessible.', 'wprefr' )
 			);
 		}
 
@@ -741,7 +741,7 @@ class YOURLSCreator_Helper
 			// return the icon and text
 			$data   = array(
 				'icon'  => '<span class="api-status-icon api-status-icon-bad"></span>',
-				'text'  => __( 'The YOURLS API is currently NOT accessible.', 'wpyourls' )
+				'text'  => __( 'The YOURLS API is currently NOT accessible.', 'wprefr' )
 			);
 		}
 

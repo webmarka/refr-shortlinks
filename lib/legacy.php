@@ -1,10 +1,10 @@
 <?php
 /**
- * YOURLS Link Creator - Legacy Module
+ * REFR Shortlinks - Legacy Module
  *
  * Holds the old functions from Ozh's plugin
  *
- * @package YOURLS Link Creator
+ * @package REFR Shortlinks
  */
 /*  Copyright 2015 Reaktiv Studios
 

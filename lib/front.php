@@ -1,10 +1,10 @@
 <?php
 /**
- * YOURLS Link Creator - Front End Module
+ * REFR Shortlinks - Front End Module
  *
  * Contains front end functions
  *
- * @package YOURLS Link Creator
+ * @package REFR Shortlinks
  */
 /*  Copyright 2015 Reaktiv Studios
 
@@ -108,8 +108,8 @@ class YOURLSCreator_Front
 		$show   = '';
 
 		// build the markup
-		$show  .= '<p class="yourls-display">' . __( 'Shortlink:', 'wpyourls' );
-			$show  .= '<input id="yourls-link-' . absint( $post_id ) . '" class="yourls-link" size="28" title="' . __( 'click to highlight', 'wpyourls' ) . '" type="url" name="yourls-link-' . absint( $post_id ) . '" value="'. esc_url( $link ) .'" readonly="readonly" tabindex="501" onclick="this.focus();this.select()" />';
+		$show  .= '<p class="yourls-display">' . __( 'Shortlink:', 'wprefr' );
+			$show  .= '<input id="yourls-link-' . absint( $post_id ) . '" class="yourls-link" size="28" title="' . __( 'click to highlight', 'wprefr' ) . '" type="url" name="yourls-link-' . absint( $post_id ) . '" value="'. esc_url( $link ) .'" readonly="readonly" tabindex="501" onclick="this.focus();this.select()" />';
 		$show  .= '</p>';
 
 		// echo the box if requested

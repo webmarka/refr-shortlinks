@@ -1,10 +1,10 @@
 <?php
 /**
- * YOURLS Link Creator - Ajax Module
+ * REFR Shortlinks - Ajax Module
  *
  * Contains our ajax related functions
  *
- * @package YOURLS Link Creator
+ * @package REFR Shortlinks
  */
 /*  Copyright 2015 Reaktiv Studios
 
@@ -64,7 +64,7 @@ class YOURLSCreator_Ajax
 		if( ! $check ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NONCE_FAILED';
-			$ret['message'] = __( 'The nonce did not validate.', 'wpyourls' );
+			$ret['message'] = __( 'The nonce did not validate.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -73,7 +73,7 @@ class YOURLSCreator_Ajax
 		if(	false === $api = YOURLSCreator_Helper::get_yourls_api_data() ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_API_DATA';
-			$ret['message'] = __( 'No API data has been entered.', 'wpyourls' );
+			$ret['message'] = __( 'No API data has been entered.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -82,7 +82,7 @@ class YOURLSCreator_Ajax
 		if( empty( $_POST['post_id'] ) ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_POST_ID';
-			$ret['message'] = __( 'No post ID was present.', 'wpyourls' );
+			$ret['message'] = __( 'No post ID was present.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -94,7 +94,7 @@ class YOURLSCreator_Ajax
 		if ( ! in_array( get_post_status( $post_id ), YOURLSCreator_Helper::get_yourls_status() ) ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'INVALID_STATUS';
-			$ret['message'] = __( 'This is not a valid post status.', 'wpyourls' );
+			$ret['message'] = __( 'This is not a valid post status.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -103,7 +103,7 @@ class YOURLSCreator_Ajax
 		if ( false !== $link = YOURLSCreator_Helper::get_yourls_meta( $post_id, '_yourls_url' ) ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'URL_EXISTS';
-			$ret['message'] = __( 'A URL already exists.', 'wpyourls' );
+			$ret['message'] = __( 'A URL already exists.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -112,7 +112,7 @@ class YOURLSCreator_Ajax
 		if ( false === $url = YOURLSCreator_Helper::prepare_api_link( $post_id ) ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_PERMALINK';
-			$ret['message'] = __( 'No permalink could be retrieved.', 'wpyourls' );
+			$ret['message'] = __( 'No permalink could be retrieved.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -131,7 +131,7 @@ class YOURLSCreator_Ajax
 		if ( empty( $build ) ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'EMPTY_API';
-			$ret['message'] = __( 'There was an unknown API error.', 'wpyourls' );
+			$ret['message'] = __( 'There was an unknown API error.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -157,7 +157,7 @@ class YOURLSCreator_Ajax
 
 			// and do the API return
 			$ret['success'] = true;
-			$ret['message'] = __( 'You have created a new YOURLS link.', 'wpyourls' );
+			$ret['message'] = __( 'You have created a new YOURLS link.', 'wprefr' );
 			$ret['linkurl'] = $shorturl;
 			$ret['linkbox'] = YOURLSCreator_Helper::get_yourls_linkbox( $shorturl, $post_id );
 			echo json_encode( $ret );
@@ -167,7 +167,7 @@ class YOURLSCreator_Ajax
 		// we've reached the end, and nothing worked....
 		$ret['success'] = false;
 		$ret['errcode'] = 'UNKNOWN';
-		$ret['message'] = __( 'There was an unknown error.', 'wpyourls' );
+		$ret['message'] = __( 'There was an unknown error.', 'wprefr' );
 		echo json_encode( $ret );
 		die();
 	}
@@ -192,7 +192,7 @@ class YOURLSCreator_Ajax
 		if( ! $check ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NONCE_FAILED';
-			$ret['message'] = __( 'The nonce did not validate.', 'wpyourls' );
+			$ret['message'] = __( 'The nonce did not validate.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -201,7 +201,7 @@ class YOURLSCreator_Ajax
 		if(	false === $api = YOURLSCreator_Helper::get_yourls_api_data() ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_API_DATA';
-			$ret['message'] = __( 'No API data has been entered.', 'wpyourls' );
+			$ret['message'] = __( 'No API data has been entered.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -210,7 +210,7 @@ class YOURLSCreator_Ajax
 		if( empty( $_POST['post_id'] ) ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_POST_ID';
-			$ret['message'] = __( 'No post ID was present.', 'wpyourls' );
+			$ret['message'] = __( 'No post ID was present.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -222,7 +222,7 @@ class YOURLSCreator_Ajax
 		if ( false === $link = YOURLSCreator_Helper::get_yourls_meta( $post_id, '_yourls_url' ) ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_URL_EXISTS';
-			$ret['message'] = __( 'There is no URL to delete.', 'wpyourls' );
+			$ret['message'] = __( 'There is no URL to delete.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -233,7 +233,7 @@ class YOURLSCreator_Ajax
 
 		// and do the API return
 		$ret['success'] = true;
-		$ret['message'] = __( 'You have removed your YOURLS link.', 'wpyourls' );
+		$ret['message'] = __( 'You have removed your YOURLS link.', 'wprefr' );
 		$ret['linkbox'] = YOURLSCreator_Helper::get_yourls_subbox( $post_id );
 		echo json_encode( $ret );
 		die();
@@ -256,7 +256,7 @@ class YOURLSCreator_Ajax
 		if(	false === $api = YOURLSCreator_Helper::get_yourls_api_data() ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_API_DATA';
-			$ret['message'] = __( 'No API data has been entered.', 'wpyourls' );
+			$ret['message'] = __( 'No API data has been entered.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -265,7 +265,7 @@ class YOURLSCreator_Ajax
 		if( empty( $_POST['post_id'] ) ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_POST_ID';
-			$ret['message'] = __( 'No post ID was present.', 'wpyourls' );
+			$ret['message'] = __( 'No post ID was present.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -280,7 +280,7 @@ class YOURLSCreator_Ajax
 		if( ! $check ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NONCE_FAILED';
-			$ret['message'] = __( 'The nonce did not validate.', 'wpyourls' );
+			$ret['message'] = __( 'The nonce did not validate.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -302,7 +302,7 @@ class YOURLSCreator_Ajax
 
 		// and do the API return
 		$ret['success'] = true;
-		$ret['message'] = __( 'Your YOURLS click count has been updated', 'wpyourls' );
+		$ret['message'] = __( 'Your YOURLS click count has been updated', 'wprefr' );
 		$ret['clicknm'] = $clicks['clicknm'];
 		echo json_encode( $ret );
 		die();
@@ -325,7 +325,7 @@ class YOURLSCreator_Ajax
 		if(	false === $api = YOURLSCreator_Helper::get_yourls_api_data() ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_API_DATA';
-			$ret['message'] = __( 'No API data has been entered.', 'wpyourls' );
+			$ret['message'] = __( 'No API data has been entered.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -334,7 +334,7 @@ class YOURLSCreator_Ajax
 		if( empty( $_POST['post_id'] ) ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_POST_ID';
-			$ret['message'] = __( 'No post ID was present.', 'wpyourls' );
+			$ret['message'] = __( 'No post ID was present.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -346,7 +346,7 @@ class YOURLSCreator_Ajax
 		if ( ! in_array( get_post_status( $post_id ), YOURLSCreator_Helper::get_yourls_status() ) ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'INVALID_STATUS';
-			$ret['message'] = __( 'This is not a valid post status.', 'wpyourls' );
+			$ret['message'] = __( 'This is not a valid post status.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -358,7 +358,7 @@ class YOURLSCreator_Ajax
 		if( ! $check ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NONCE_FAILED';
-			$ret['message'] = __( 'The nonce did not validate.', 'wpyourls' );
+			$ret['message'] = __( 'The nonce did not validate.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -367,7 +367,7 @@ class YOURLSCreator_Ajax
 		if ( false !== $link = YOURLSCreator_Helper::get_yourls_meta( $post_id, '_yourls_url' ) ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'URL_EXISTS';
-			$ret['message'] = __( 'A URL already exists.', 'wpyourls' );
+			$ret['message'] = __( 'A URL already exists.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -376,7 +376,7 @@ class YOURLSCreator_Ajax
 		if ( false === $url = YOURLSCreator_Helper::prepare_api_link( $post_id ) ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_PERMALINK';
-			$ret['message'] = __( 'No permalink could be retrieved.', 'wpyourls' );
+			$ret['message'] = __( 'No permalink could be retrieved.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -397,7 +397,7 @@ class YOURLSCreator_Ajax
 		if ( empty( $build ) ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'EMPTY_API';
-			$ret['message'] = __( 'There was an unknown API error.', 'wpyourls' );
+			$ret['message'] = __( 'There was an unknown API error.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -423,7 +423,7 @@ class YOURLSCreator_Ajax
 
 			// and do the API return
 			$ret['success'] = true;
-			$ret['message'] = __( 'You have created a new YOURLS link.', 'wpyourls' );
+			$ret['message'] = __( 'You have created a new YOURLS link.', 'wprefr' );
 			$ret['rowactn'] = '<span class="update-yourls">' . YOURLSCreator_Helper::update_row_action( $post_id ) . '</span>';
 			echo json_encode( $ret );
 			die();
@@ -432,7 +432,7 @@ class YOURLSCreator_Ajax
 		// we've reached the end, and nothing worked....
 		$ret['success'] = false;
 		$ret['errcode'] = 'UNKNOWN';
-		$ret['message'] = __( 'There was an unknown error.', 'wpyourls' );
+		$ret['message'] = __( 'There was an unknown error.', 'wprefr' );
 		echo json_encode( $ret );
 		die();
 	}
@@ -457,7 +457,7 @@ class YOURLSCreator_Ajax
 		if( ! $check ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NONCE_FAILED';
-			$ret['message'] = __( 'The nonce did not validate.', 'wpyourls' );
+			$ret['message'] = __( 'The nonce did not validate.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -466,7 +466,7 @@ class YOURLSCreator_Ajax
 		if(	false === $api = YOURLSCreator_Helper::get_yourls_api_data() ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_API_DATA';
-			$ret['message'] = __( 'No API data has been entered.', 'wpyourls' );
+			$ret['message'] = __( 'No API data has been entered.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -491,7 +491,7 @@ class YOURLSCreator_Ajax
 		if( empty( $data ) ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_STATUS_DATA';
-			$ret['message'] = __( 'The status of the YOURLS API could not be determined.', 'wpyourls' );
+			$ret['message'] = __( 'The status of the YOURLS API could not be determined.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -510,7 +510,7 @@ class YOURLSCreator_Ajax
 		// we've reached the end, and nothing worked....
 		$ret['success'] = false;
 		$ret['errcode'] = 'UNKNOWN';
-		$ret['message'] = __( 'There was an unknown error.', 'wpyourls' );
+		$ret['message'] = __( 'There was an unknown error.', 'wprefr' );
 		echo json_encode( $ret );
 		die();
 	}
@@ -535,7 +535,7 @@ class YOURLSCreator_Ajax
 		if( ! $check ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NONCE_FAILED';
-			$ret['message'] = __( 'The nonce did not validate.', 'wpyourls' );
+			$ret['message'] = __( 'The nonce did not validate.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -544,7 +544,7 @@ class YOURLSCreator_Ajax
 		if(	false === $api = YOURLSCreator_Helper::get_yourls_api_data() ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_API_DATA';
-			$ret['message'] = __( 'No API data has been entered.', 'wpyourls' );
+			$ret['message'] = __( 'No API data has been entered.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -553,7 +553,7 @@ class YOURLSCreator_Ajax
 		if ( false === $items = YOURLSCreator_Helper::get_yourls_post_ids() ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_POST_IDS';
-			$ret['message'] = __( 'There are no items with stored URLs.', 'wpyourls' );
+			$ret['message'] = __( 'There are no items with stored URLs.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -579,7 +579,7 @@ class YOURLSCreator_Ajax
 
 		// and do the API return
 		$ret['success'] = true;
-		$ret['message'] = __( 'The click counts have been updated', 'wpyourls' );
+		$ret['message'] = __( 'The click counts have been updated', 'wprefr' );
 		echo json_encode( $ret );
 		die();
 	}
@@ -601,7 +601,7 @@ class YOURLSCreator_Ajax
 		if( ! $check ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NONCE_FAILED';
-			$ret['message'] = __( 'The nonce did not validate.', 'wpyourls' );
+			$ret['message'] = __( 'The nonce did not validate.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -613,7 +613,7 @@ class YOURLSCreator_Ajax
 		if ( false === $items = YOURLSCreator_Helper::get_yourls_post_ids( $key ) ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_KEYS';
-			$ret['message'] = __( 'There are no meta keys to convert.', 'wpyourls' );
+			$ret['message'] = __( 'There are no meta keys to convert.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -640,7 +640,7 @@ class YOURLSCreator_Ajax
 		if( $query == 0 ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'KEY_MISSING';
-			$ret['message'] = __( 'There are no keys matching this criteria. Please try again.', 'wpyourls' );
+			$ret['message'] = __( 'There are no keys matching this criteria. Please try again.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -650,7 +650,7 @@ class YOURLSCreator_Ajax
 			$ret['success'] = true;
 			$ret['errcode'] = null;
 			$ret['updated'] = $query;
-			$ret['message'] = sprintf( _n( '%d key has been updated.', '%d keys have been updated.', $query, 'wpyourls' ), $query );
+			$ret['message'] = sprintf( _n( '%d key has been updated.', '%d keys have been updated.', $query, 'wprefr' ), $query );
 			echo json_encode( $ret );
 			die();
 		}
@@ -674,7 +674,7 @@ class YOURLSCreator_Ajax
 		if( ! $check ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NONCE_FAILED';
-			$ret['message'] = __( 'The nonce did not validate.', 'wpyourls' );
+			$ret['message'] = __( 'The nonce did not validate.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -683,7 +683,7 @@ class YOURLSCreator_Ajax
 		if(	false === $api = YOURLSCreator_Helper::get_yourls_api_data() ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_API_DATA';
-			$ret['message'] = __( 'No API data has been entered.', 'wpyourls' );
+			$ret['message'] = __( 'No API data has been entered.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -698,7 +698,7 @@ class YOURLSCreator_Ajax
 		if ( empty( $fetch ) ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'EMPTY_API';
-			$ret['message'] = __( 'There was an unknown API error.', 'wpyourls' );
+			$ret['message'] = __( 'There was an unknown API error.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -716,7 +716,7 @@ class YOURLSCreator_Ajax
 		if ( empty( $fetch['data']['links'] ) ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_LINKS';
-			$ret['message'] = __( 'There was no available link data to import.', 'wpyourls' );
+			$ret['message'] = __( 'There was no available link data to import.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -728,7 +728,7 @@ class YOURLSCreator_Ajax
 		if ( empty( $filter ) ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_MATCHING_LINKS';
-			$ret['message'] = __( 'There were no matching links to import.', 'wpyourls' );
+			$ret['message'] = __( 'There were no matching links to import.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -753,7 +753,7 @@ class YOURLSCreator_Ajax
 		if ( true === $error ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_IMPORT_ACTION';
-			$ret['message'] = __( 'The data could not be imported.', 'wpyourls' );
+			$ret['message'] = __( 'The data could not be imported.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -761,7 +761,7 @@ class YOURLSCreator_Ajax
 		// hooray. it worked. do the ajax return
 		if ( false === $error ) {
 			$ret['success'] = true;
-			$ret['message'] = __( 'All available YOURLS data has been imported.', 'wpyourls' );
+			$ret['message'] = __( 'All available YOURLS data has been imported.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -769,7 +769,7 @@ class YOURLSCreator_Ajax
 		// we've reached the end, and nothing worked....
 		$ret['success'] = false;
 		$ret['errcode'] = 'UNKNOWN';
-		$ret['message'] = __( 'There was an unknown error.', 'wpyourls' );
+		$ret['message'] = __( 'There was an unknown error.', 'wprefr' );
 		echo json_encode( $ret );
 		die();
 	}

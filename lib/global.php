@@ -1,10 +1,10 @@
 <?php
 /**
- * YOURLS Link Creator - Global Module
+ * REFR Shortlinks - Global Module
  *
  * Contains functions and options that involve both front and back
  *
- * @package YOURLS Link Creator
+ * @package REFR Shortlinks
  */
 /*  Copyright 2015 Reaktiv Studios
 

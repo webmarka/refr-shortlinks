@@ -1,10 +1,10 @@
 <?php
 /**
- * YOURLS Link Creator - Settings Module
+ * REFR Shortlinks - Settings Module
  *
  * Contains the specific settings page configuration
  *
- * @package YOURLS Link Creator
+ * @package REFR Shortlinks
  */
 /*  Copyright 2015 Reaktiv Studios
 
@@ -62,7 +62,7 @@ class YOURLSCreator_Settings
 		}
 
 		// buil my link
-		$single = '<a href="' . menu_page_url( 'yourls-settings', 0 ) . '">' . __( 'Settings', 'wpyourls' ) . '</a>';
+		$single = '<a href="' . menu_page_url( 'yourls-settings', 0 ) . '">' . __( 'Settings', 'wprefr' ) . '</a>';
 
 		// get it in the group
 		array_push( $links, $single );
@@ -77,7 +77,7 @@ class YOURLSCreator_Settings
 	 * @return void
 	 */
 	public function yourls_menu_item() {
-		add_options_page( __( 'YOURLS Settings', 'wpyourls' ), __( 'YOURLS Settings', 'wpyourls' ), apply_filters( 'yourls_settings_cap', 'manage_options' ), 'yourls-settings', array( __class__, 'yourls_settings_page' ) );
+		add_options_page( __( 'YOURLS Settings', 'wprefr' ), __( 'YOURLS Settings', 'wprefr' ), apply_filters( 'yourls_settings_cap', 'manage_options' ), 'yourls-settings', array( __class__, 'yourls_settings_page' ) );
 	}
 
 	/**
@@ -212,7 +212,7 @@ class YOURLSCreator_Settings
 		if ( ! empty( $_GET['yourls-saved'] ) ) {
 			// the message
 			echo '<div class="updated settings-error" id="setting-error-settings_updated">';
-			echo '<p><strong>' . __( 'Your settings have been saved.', 'wpyourls' ) . '</strong></p>';
+			echo '<p><strong>' . __( 'Your settings have been saved.', 'wprefr' ) . '</strong></p>';
 			echo '</div>';
 		}
 
@@ -220,7 +220,7 @@ class YOURLSCreator_Settings
 		if ( ! empty( $_GET['yourls-deleted'] ) ) {
 			// the message
 			echo '<div class="error settings-error" id="setting-error-settings_updated">';
-			echo '<p><strong>' . __( 'Your settings have been deleted.', 'wpyourls' ) . '</strong></p>';
+			echo '<p><strong>' . __( 'Your settings have been deleted.', 'wprefr' ) . '</strong></p>';
 			echo '</div>';
 		}
 	}
@@ -258,7 +258,7 @@ class YOURLSCreator_Settings
 		?>
 
 		<div class="wrap">
-		<h2><?php _e( 'YOURLS Link Creator Settings', 'wpyourls' ); ?></h2>
+		<h2><?php _e( 'REFR Shortlinks Settings', 'wprefr' ); ?></h2>
 
 		<div id="poststuff" class="metabox-holder has-right-sidebar">
 			<?php
@@ -267,7 +267,7 @@ class YOURLSCreator_Settings
 			?>
 
 		   	<div class="yourls-form-text">
-		   	<p><?php _e( 'Below are the basic settings for the YOURLS creator. A reminder, your YOURLS install cannot be public.', 'wpyourls' ); ?></p>
+		   	<p><?php _e( 'Below are the basic settings for the YOURLS creator. A reminder, your YOURLS install cannot be public.', 'wprefr' ); ?></p>
 			</div>
 
 			<div class="yourls-form-options">
@@ -292,56 +292,56 @@ class YOURLSCreator_Settings
 				<table class="form-table yourls-table">
 				<tbody>
 					<tr>
-						<th><?php _e( 'YOURLS Custom URL', 'wpyourls' ); ?></th>
+						<th><?php _e( 'YOURLS Custom URL', 'wprefr' ); ?></th>
 						<td>
 							<input type="url" class="regular-text code" value="<?php echo esc_url( $url ); ?>" id="yourls-url" name="yourls-options[url]">
-							<p class="description"><?php _e( 'Enter the domain URL for your YOURLS API', 'wpyourls' ); ?></p>
+							<p class="description"><?php _e( 'Enter the domain URL for your YOURLS API', 'wprefr' ); ?></p>
 						</td>
 					</tr>
 
 					<tr>
-						<th><?php _e( 'YOURLS API Signature Key', 'wpyourls' ); ?></th>
+						<th><?php _e( 'YOURLS API Signature Key', 'wprefr' ); ?></th>
 						<td class="apikey-field-wrapper">
 							<input type="text" class="regular-text code" value="<?php echo esc_attr( $api ); ?>" id="yourls-api" name="yourls-options[api]" autocomplete="off">
 							<span class="dashicons dashicons-visibility password-toggle"></span>
-							<p class="description"><?php _e('Found in the tools section on your YOURLS admin page.', 'wpyourls') ?></p>
+							<p class="description"><?php _e('Found in the tools section on your YOURLS admin page.', 'wprefr') ?></p>
 						</td>
 					</tr>
 
 					<tr>
-						<th><?php _e( 'Auto generate links', 'wpyourls' ) ?></th>
+						<th><?php _e( 'Auto generate links', 'wprefr' ) ?></th>
 						<td class="setting-item">
 							<input type="checkbox" name="yourls-options[sav]" id="yourls-sav" value="true" <?php checked( $save, true ); ?> />
-							<label for="yourls-sav"><?php _e( 'Create a YOURLS link when a post is saved.', 'wpyourls' ); ?></label>
+							<label for="yourls-sav"><?php _e( 'Create a YOURLS link when a post is saved.', 'wprefr' ); ?></label>
 						</td>
 					</tr>
 
 					<tr>
-						<th><?php _e( 'Scheduled Content', 'wpyourls' ) ?></th>
+						<th><?php _e( 'Scheduled Content', 'wprefr' ) ?></th>
 						<td class="setting-item">
 							<input type="checkbox" name="yourls-options[sch]" id="yourls-sch" value="true" <?php checked( $schd, true ); ?> />
-							<label for="yourls-sch"><?php _e( 'Create a YOURLS link when a scheduled post publishes.', 'wpyourls' ); ?></label>
+							<label for="yourls-sch"><?php _e( 'Create a YOURLS link when a scheduled post publishes.', 'wprefr' ); ?></label>
 						</td>
 					</tr>
 
 					<tr>
-						<th><?php _e( 'Use YOURLS for shortlink', 'wpyourls' ) ?></th>
+						<th><?php _e( 'Use YOURLS for shortlink', 'wprefr' ) ?></th>
 						<td class="setting-item">
 							<input type="checkbox" name="yourls-options[sht]" id="yourls-sht" value="true" <?php checked( $short, true ); ?> />
-							<label for="yourls-sht"><?php _e( 'Use the YOURLS link wherever wp_shortlink is fired', 'wpyourls' ); ?></label>
+							<label for="yourls-sht"><?php _e( 'Use the YOURLS link wherever wp_shortlink is fired', 'wprefr' ); ?></label>
 						</td>
 					</tr>
 
 					<tr class="setting-item-types">
-						<th><?php _e( 'Include Custom Post Types', 'wpyourls' ) ?></th>
+						<th><?php _e( 'Include Custom Post Types', 'wprefr' ) ?></th>
 						<td class="setting-item">
 							<input type="checkbox" name="yourls-options[cpt]" id="yourls-cpt" value="true" <?php checked( $cpts, true ); ?> />
-							<label for="yourls-cpt"><?php _e( 'Display the YOURLS creator on public custom post types', 'wpyourls' ); ?></label>
+							<label for="yourls-cpt"><?php _e( 'Display the YOURLS creator on public custom post types', 'wprefr' ); ?></label>
 						</td>
 					</tr>
 
 					<tr class="secondary yourls-types" style="display:none;">
-						<th><?php _e( 'Select the types to include', 'wpyourls' ); ?></th>
+						<th><?php _e( 'Select the types to include', 'wprefr' ); ?></th>
 						<td><?php echo self::post_types( $types ); ?></td>
 					</tr>
 
@@ -441,20 +441,20 @@ class YOURLSCreator_Settings
 	public static function sidebox_about() { ?>
 
 		<div id="yourls-admin-about" class="postbox yourls-sidebox">
-			<h3 class="hndle" id="about-sidebar"><?php _e( 'About the Plugin', 'wpyourls' ); ?></h3>
+			<h3 class="hndle" id="about-sidebar"><?php _e( 'About the Plugin', 'wprefr' ); ?></h3>
 			<div class="inside">
 
-				<p><strong><?php _e( 'Questions?', 'wpyourls' ); ?></strong><br />
+				<p><strong><?php _e( 'Questions?', 'wprefr' ); ?></strong><br />
 
-				<?php echo sprintf( __( 'Talk to <a href="%s" class="external">@norcross</a> on twitter or visit the <a href="%s" class="external">plugin support forum</a> for bugs or feature requests.', 'wpyourls' ), esc_url( 'https://twitter.com/norcross' ), esc_url( 'https://wordpress.org/support/plugin/yourls-link-creator/' ) ); ?></p>
+				<?php echo sprintf( __( 'Talk to <a href="%s" class="external">@norcross</a> on twitter or visit the <a href="%s" class="external">plugin support forum</a> for bugs or feature requests.', 'wprefr' ), esc_url( 'https://twitter.com/norcross' ), esc_url( 'https://wordpress.org/support/plugin/yourls-link-creator/' ) ); ?></p>
 
-				<p><strong><?php _e( 'Enjoy the plugin?', 'wpyourls' ); ?></strong><br />
+				<p><strong><?php _e( 'Enjoy the plugin?', 'wprefr' ); ?></strong><br />
 
-				<?php echo sprintf( __( '<a href="%s" class="admin-twitter-link">Tweet about it</a> and consider donating.', 'wpyourls' ), 'http://twitter.com/?status=I\'m using @norcross\'s YOURLS Link Creator plugin - check it out! http://l.norc.co/yourls/' ); ?>
+				<?php echo sprintf( __( '<a href="%s" class="admin-twitter-link">Tweet about it</a> and consider donating.', 'wprefr' ), 'http://twitter.com/?status=I\'m using @norcross\'s REFR Shortlinks plugin - check it out! http://l.norc.co/yourls/' ); ?>
 
-				<p><strong><?php _e( 'Donate:', 'wpyourls' ) ?></strong><br />
+				<p><strong><?php _e( 'Donate:', 'wprefr' ) ?></strong><br />
 
-				<?php _e( 'A lot of hard work goes into building plugins - support your open source developers. Include your twitter username and I\'ll send you a shout out for your generosity. Thank you!', 'wpyourls' ); ?></p>
+				<?php _e( 'A lot of hard work goes into building plugins - support your open source developers. Include your twitter username and I\'ll send you a shout out for your generosity. Thank you!', 'wprefr' ); ?></p>
 
 				<?php self::side_paypal(); ?>
 			</div>
@@ -474,14 +474,14 @@ class YOURLSCreator_Settings
 		?>
 
 		<div id="yourls-admin-status" class="postbox yourls-sidebox">
-			<h3 class="hndle" id="status-sidebar"><?php echo $data['icon']; ?><?php _e( 'API Status Check', 'wpyourls' ); ?></h3>
+			<h3 class="hndle" id="status-sidebar"><?php echo $data['icon']; ?><?php _e( 'API Status Check', 'wprefr' ); ?></h3>
 			<div class="inside">
 				<form>
 
 				<p class="api-status-text"><?php echo esc_attr( $data['text'] ); ?></p>
 
 				<p class="api-status-actions">
-					<input type="button" class="yourls-click-status button-primary" value="<?php _e( 'Check Status', 'wpyourls' ); ?>" >
+					<input type="button" class="yourls-click-status button-primary" value="<?php _e( 'Check Status', 'wprefr' ); ?>" >
 					<span class="spinner yourls-spinner yourls-status-spinner"></span>
 					<?php wp_nonce_field( 'yourls_status_nonce', 'yourls_status', false, true ); ?>
 
@@ -499,25 +499,25 @@ class YOURLSCreator_Settings
 	public static function sidebox_data() { ?>
 
 		<div id="yourls-data-refresh" class="postbox yourls-sidebox">
-			<h3 class="hndle" id="data-sidebar"><?php _e( 'Data Options', 'wpyourls' ); ?></h3>
+			<h3 class="hndle" id="data-sidebar"><?php _e( 'Data Options', 'wprefr' ); ?></h3>
 			<div class="inside">
 				<form>
-					<p><?php _e( 'Click the button below to refresh the click count data for all posts with a YOURLS link.', 'wpyourls' ); ?></p>
-					<input type="button" class="yourls-click-updates button-primary" value="<?php _e( 'Refresh Click Counts', 'wpyourls' ); ?>" >
+					<p><?php _e( 'Click the button below to refresh the click count data for all posts with a YOURLS link.', 'wprefr' ); ?></p>
+					<input type="button" class="yourls-click-updates button-primary" value="<?php _e( 'Refresh Click Counts', 'wprefr' ); ?>" >
 					<span class="spinner yourls-spinner yourls-refresh-spinner"></span>
 					<?php wp_nonce_field( 'yourls_refresh_nonce', 'yourls_refresh', false, true ); ?>
 
 					<hr />
 
-					<p><?php _e( 'Click the button below to attempt an import of existing YOURLS links.', 'wpyourls' ); ?></p>
-					<input type="button" class="yourls-click-import button-primary" value="<?php _e( 'Import Existing URLs', 'wpyourls' ); ?>" >
+					<p><?php _e( 'Click the button below to attempt an import of existing YOURLS links.', 'wprefr' ); ?></p>
+					<input type="button" class="yourls-click-import button-primary" value="<?php _e( 'Import Existing URLs', 'wprefr' ); ?>" >
 					<span class="spinner yourls-spinner yourls-import-spinner"></span>
 					<?php wp_nonce_field( 'yourls_import_nonce', 'yourls_import', false, true ); ?>
 
 					<hr />
 
-					<p><?php _e( 'Using Ozh\'s plugin? Click here to convert the existing meta keys', 'wpyourls' ); ?></p>
-					<input type="button" class="yourls-convert button-primary" value="<?php _e( 'Convert Meta Keys', 'wpyourls' ); ?>" >
+					<p><?php _e( 'Using Ozh\'s plugin? Click here to convert the existing meta keys', 'wprefr' ); ?></p>
+					<input type="button" class="yourls-convert button-primary" value="<?php _e( 'Convert Meta Keys', 'wprefr' ); ?>" >
 					<span class="spinner yourls-spinner yourls-convert-spinner"></span>
 					<?php wp_nonce_field( 'yourls_convert_nonce', 'yourls_convert', false, true ); ?>
 
@@ -533,13 +533,13 @@ class YOURLSCreator_Settings
 	public static function sidebox_links() { ?>
 
 		<div id="yourls-admin-links" class="postbox yourls-sidebox">
-			<h3 class="hndle" id="links-sidebar"><?php _e( 'Additional Links', 'wpyourls' ); ?></h3>
+			<h3 class="hndle" id="links-sidebar"><?php _e( 'Additional Links', 'wprefr' ); ?></h3>
 			<div class="inside">
 				<ul>
-					<li><a href="http://yourls.org/" target="_blank"><?php _e( 'YOURLS homepage', 'wpyourls' ); ?></a></li>
-					<li><a href="http://wordpress.org/extend/plugins/yourls-link-creator/" target="_blank"><?php _e( 'Plugin on WP.org', 'wpyourls' ); ?></a></li>
-					<li><a href="https://github.com/norcross/yourls-link-creator/" target="_blank"><?php _e( 'Plugin on GitHub', 'wpyourls' ); ?></a></li>
-					<li><a href="http://wordpress.org/support/plugin/yourls-link-creator/" target="_blank"><?php _e( 'Support Forum', 'wpyourls' ); ?></a><li>
+					<li><a href="http://yourls.org/" target="_blank"><?php _e( 'YOURLS homepage', 'wprefr' ); ?></a></li>
+					<li><a href="http://wordpress.org/extend/plugins/yourls-link-creator/" target="_blank"><?php _e( 'Plugin on WP.org', 'wprefr' ); ?></a></li>
+					<li><a href="https://github.com/norcross/yourls-link-creator/" target="_blank"><?php _e( 'Plugin on GitHub', 'wprefr' ); ?></a></li>
+					<li><a href="http://wordpress.org/support/plugin/yourls-link-creator/" target="_blank"><?php _e( 'Support Forum', 'wprefr' ); ?></a><li>
 				</ul>
 			</div>
 		</div>
@@ -554,7 +554,7 @@ class YOURLSCreator_Settings
 		<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
 			<input type="hidden" name="cmd" value="_s-xclick">
 			<input type="hidden" name="hosted_button_id" value="11085100">
-			<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="<?php _e( 'PayPal - The safer, easier way to pay online!', 'wpyourls' ); ?>">
+			<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="<?php _e( 'PayPal - The safer, easier way to pay online!', 'wprefr' ); ?>">
 			<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 		</form>
 

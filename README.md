@@ -1,11 +1,9 @@
-# YOURLS Link Creator #
-**Contributors:** norcross
+# REFR Shortlinks #
+**Contributors:** webmarka, norcross (original plugin author)
 
-**Website Link:** http://andrewnorcross.com/plugins/yourls-link-creator/
+**Website Link:** https://refr.ca/
 
-**Donate link:** https://andrewnorcross.com/donate
-
-**Tags:** YOURLS, shortlink, custom URL
+**Tags:** REFR, shortlink, custom URL, YOURLS
 
 **Requires at least:** 3.6
 
@@ -37,7 +35,7 @@ Features:
 
 This section describes how to install the plugin and get it working.
 
-1. Upload `yourls-link-creator` to the `/wp-content/plugins/` directory.
+1. Upload `refr-shortlinks` to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 3. Navigate to the "YOURLS Settings" option in the Settings Menu.
 4. Enter your YOURLS custom URL and API key

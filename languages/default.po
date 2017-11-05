@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: wpyourls\n"
+"Project-Id-Version: wprefr\n"
 "POT-Creation-Date: 2015-02-13 22:37-0500\n"
 "PO-Revision-Date: 2015-02-13 22:38-0500\n"
-"Last-Translator: Andrew Norcross <andrew.norcross@gmail.com>\n"
+"Last-Translator: Marc-Antoine Minville (original author : Andrew Norcross) <andrew.norcross@gmail.com>\n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
@@ -208,8 +208,8 @@ msgid "Your settings have been deleted."
 msgstr "Your settings have been deleted."
 
 #: lib/settings.php:260
-msgid "YOURLS Link Creator Settings"
-msgstr "YOURLS Link Creator Settings"
+msgid "REFR Shortlinks Settings"
+msgstr "REFR Shortlinks Settings"
 
 #: lib/settings.php:269
 msgid ""
