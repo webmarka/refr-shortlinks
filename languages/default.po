@@ -1,44 +1,44 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: wprefr\n"
-"POT-Creation-Date: 2015-02-13 22:37-0500\n"
-"PO-Revision-Date: 2015-02-13 22:38-0500\n"
-"Last-Translator: Marc-Antoine Minville (original author : Andrew Norcross) <andrew.norcross@gmail.com>\n"
+"POT-Creation-Date: 2017-11-04 21:02-0400\n"
+"PO-Revision-Date: 2017-11-04 21:02-0400\n"
+"Last-Translator: Marc-Antoine Minville <traductions@kajoom.org>\n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.7\n"
+"X-Generator: Poedit 1.8.7.1\n"
 "X-Poedit-KeywordsList: _;__;_e;gettext;gettext_noop\n"
-"X-Poedit-Basepath: ../\n"
+"X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: lib\n"
 
-#: lib/admin.php:72
+#: lib/admin.php:73
 msgid "Get Shortlink"
 msgstr "Get Shortlink"
 
-#: lib/admin.php:73
+#: lib/admin.php:74
 msgid "There was an error with your request."
 msgstr "There was an error with your request."
 
-#: lib/admin.php:109
+#: lib/admin.php:105
 msgid "REFR Shortlink"
 msgstr "REFR Shortlink"
 
-#: lib/admin.php:252
+#: lib/admin.php:290
 msgid "REFR Clicks"
 msgstr "REFR Clicks"
 
 #: lib/ajax.php:67 lib/ajax.php:195 lib/ajax.php:283 lib/ajax.php:361
-#: lib/ajax.php:457 lib/ajax.php:535 lib/ajax.php:601 lib/ajax.php:674
+#: lib/ajax.php:460 lib/ajax.php:538 lib/ajax.php:604 lib/ajax.php:677
 msgid "The nonce did not validate."
 msgstr "The nonce did not validate."
 
 #: lib/ajax.php:76 lib/ajax.php:204 lib/ajax.php:259 lib/ajax.php:328
-#: lib/ajax.php:466 lib/ajax.php:544 lib/ajax.php:683
+#: lib/ajax.php:469 lib/ajax.php:547 lib/ajax.php:686
 msgid "No API data has been entered."
 msgstr "No API data has been entered."
 
@@ -58,15 +58,15 @@ msgstr "A URL already exists."
 msgid "No permalink could be retrieved."
 msgstr "No permalink could be retrieved."
 
-#: lib/ajax.php:134 lib/ajax.php:397 lib/ajax.php:698
+#: lib/ajax.php:134 lib/ajax.php:400 lib/ajax.php:701
 msgid "There was an unknown API error."
 msgstr "There was an unknown API error."
 
-#: lib/ajax.php:160 lib/ajax.php:423
+#: lib/ajax.php:160 lib/ajax.php:426
 msgid "You have created a new REFR link."
 msgstr "You have created a new REFR link."
 
-#: lib/ajax.php:170 lib/ajax.php:432 lib/ajax.php:510 lib/ajax.php:769
+#: lib/ajax.php:170 lib/ajax.php:435 lib/ajax.php:513 lib/ajax.php:772
 msgid "There was an unknown error."
 msgstr "There was an unknown error."
 
@@ -82,112 +82,116 @@ msgstr "You have removed your REFR link."
 msgid "Your REFR click count has been updated"
 msgstr "Your REFR click count has been updated"
 
-#: lib/ajax.php:491 lib/helper.php:664
+#: lib/ajax.php:494 lib/helper.php:725
 msgid "The status of the REFR API could not be determined."
 msgstr "The status of the REFR API could not be determined."
 
-#: lib/ajax.php:553
+#: lib/ajax.php:556
 msgid "There are no items with stored URLs."
 msgstr "There are no items with stored URLs."
 
-#: lib/ajax.php:579
+#: lib/ajax.php:582
 msgid "The click counts have been updated"
 msgstr "The click counts have been updated"
 
-#: lib/ajax.php:613
+#: lib/ajax.php:616
 msgid "There are no meta keys to convert."
 msgstr "There are no meta keys to convert."
 
-#: lib/ajax.php:640
+#: lib/ajax.php:643
 msgid "There are no keys matching this criteria. Please try again."
 msgstr "There are no keys matching this criteria. Please try again."
 
-#: lib/ajax.php:716
+#: lib/ajax.php:719
 msgid "There was no available link data to import."
 msgstr "There was no available link data to import."
 
-#: lib/ajax.php:728
+#: lib/ajax.php:731
 msgid "There were no matching links to import."
 msgstr "There were no matching links to import."
 
-#: lib/ajax.php:753
+#: lib/ajax.php:756
 msgid "The data could not be imported."
 msgstr "The data could not be imported."
 
-#: lib/ajax.php:761
+#: lib/ajax.php:764
 msgid "All available REFR data has been imported."
 msgstr "All available REFR data has been imported."
 
-#: lib/front.php:92
+#: lib/front.php:111
 msgid "Shortlink:"
 msgstr "Shortlink:"
 
-#: lib/front.php:93
+#: lib/front.php:112
 msgid "click to highlight"
 msgstr "click to highlight"
 
-#: lib/helper.php:210
+#: lib/helper.php:225
 msgid "No API action was provided."
 msgstr "No API action was provided."
 
-#: lib/helper.php:219
+#: lib/helper.php:234
 msgid "The API action was invalid."
 msgstr "The API action was invalid."
 
-#: lib/helper.php:228
+#: lib/helper.php:243
 msgid "No data was returned from the API call."
 msgstr "No data was returned from the API call."
 
-#: lib/helper.php:237
+#: lib/helper.php:252
 msgid "The user requesting the URL does not have authorization."
 msgstr "The user requesting the URL does not have authorization."
 
-#: lib/helper.php:266
+#: lib/helper.php:281
 msgid "The response from the API was empty."
 msgstr "The response from the API was empty."
 
-#: lib/helper.php:287
+#: lib/helper.php:302
 #, php-format
 msgid "The API call returned a %s response code."
 msgstr "The API call returned a %s response code."
 
-#: lib/helper.php:299
+#: lib/helper.php:314
 msgid "No data was present in the body from the API call."
 msgstr "No data was present in the body from the API call."
 
-#: lib/helper.php:320
+#: lib/helper.php:335
 msgid "The JSON could not be parsed."
 msgstr "The JSON could not be parsed."
 
-#: lib/helper.php:410
+#: lib/helper.php:440
 msgid "No API data was returned."
 msgstr "No API data was returned."
 
-#: lib/helper.php:550
+#: lib/helper.php:580
 msgid "optional keyword"
 msgstr "optional keyword"
 
-#: lib/helper.php:556
+#: lib/helper.php:584
+msgid "a REFR link cannot be generated until the post is saved."
+msgstr ""
+
+#: lib/helper.php:611
 msgid "Create REFR link"
 msgstr "Create REFR link"
 
-#: lib/helper.php:588
+#: lib/helper.php:646
 msgid "Delete Link"
 msgstr "Delete Link"
 
-#: lib/helper.php:611
+#: lib/helper.php:672
 msgid "Create REFR"
 msgstr "Create REFR"
 
-#: lib/helper.php:626
+#: lib/helper.php:687
 msgid "Update REFR"
 msgstr "Update REFR"
 
-#: lib/helper.php:673
+#: lib/helper.php:734
 msgid "The REFR API is currently accessible."
 msgstr "The REFR API is currently accessible."
 
-#: lib/helper.php:683
+#: lib/helper.php:744
 msgid "The REFR API is currently NOT accessible."
 msgstr "The REFR API is currently NOT accessible."
 
@@ -207,11 +211,11 @@ msgstr "Your settings have been saved."
 msgid "Your settings have been deleted."
 msgstr "Your settings have been deleted."
 
-#: lib/settings.php:260
+#: lib/settings.php:261
 msgid "REFR Shortlinks Settings"
 msgstr "REFR Shortlinks Settings"
 
-#: lib/settings.php:269
+#: lib/settings.php:270
 msgid ""
 "Below are the basic settings for the REFR creator. A reminder, your REFR "
 "install cannot be public."
@@ -219,71 +223,71 @@ msgstr ""
 "Below are the basic settings for the REFR creator. A reminder, your REFR "
 "install cannot be public."
 
-#: lib/settings.php:294
+#: lib/settings.php:295
 msgid "REFR Custom URL"
 msgstr "REFR Custom URL"
 
-#: lib/settings.php:297
-msgid "Enter your custom REFR URL"
-msgstr "Enter your custom REFR URL"
+#: lib/settings.php:298
+msgid "Enter the domain URL for your REFR API"
+msgstr ""
 
-#: lib/settings.php:302
+#: lib/settings.php:303
 msgid "REFR API Signature Key"
 msgstr "REFR API Signature Key"
 
-#: lib/settings.php:306
+#: lib/settings.php:307
 msgid "Found in the tools section on your REFR admin page."
 msgstr "Found in the tools section on your REFR admin page."
 
-#: lib/settings.php:311
+#: lib/settings.php:312
 msgid "Auto generate links"
 msgstr "Auto generate links"
 
-#: lib/settings.php:314
+#: lib/settings.php:315
 msgid "Create a REFR link when a post is saved."
 msgstr "Create a REFR link when a post is saved."
 
-#: lib/settings.php:319
+#: lib/settings.php:320
 msgid "Scheduled Content"
 msgstr "Scheduled Content"
 
-#: lib/settings.php:322
+#: lib/settings.php:323
 msgid "Create a REFR link when a scheduled post publishes."
 msgstr "Create a REFR link when a scheduled post publishes. "
 
-#: lib/settings.php:327
+#: lib/settings.php:328
 msgid "Use REFR for shortlink"
 msgstr "Use REFR for shortlink"
 
-#: lib/settings.php:330
+#: lib/settings.php:331
 msgid "Use the REFR link wherever wp_shortlink is fired"
 msgstr "Use the REFR link wherever wp_shortlink is fired"
 
-#: lib/settings.php:335
+#: lib/settings.php:336
 msgid "Include Custom Post Types"
 msgstr "Include Custom Post Types"
 
-#: lib/settings.php:338
+#: lib/settings.php:339
 msgid "Display the REFR creator on public custom post types"
 msgstr "Display the REFR creator on public custom post types"
 
-#: lib/settings.php:343
+#: lib/settings.php:344
 msgid "Select the types to include"
 msgstr "Select the types to include"
 
-#: lib/settings.php:350
+#: lib/settings.php:351
 msgid "Save Changes"
 msgstr "Save Changes"
 
-#: lib/settings.php:443
+#: lib/settings.php:444
 msgid "About the Plugin"
 msgstr "About the Plugin"
 
-#: lib/settings.php:446
+#: lib/settings.php:447
 msgid "Questions?"
 msgstr "Questions?"
 
-#: lib/settings.php:448
+#: lib/settings.php:449
 #, php-format
 msgid ""
 "Talk to <a href=\"%s\" class=\"external\">@norcross</a> on twitter or visit "
@@ -294,11 +298,11 @@ msgstr ""
 "the <a href=\"%s\" class=\"external\">plugin support forum</a> for bugs or "
 "feature requests."
 
-#: lib/settings.php:450
+#: lib/settings.php:451
 msgid "Enjoy the plugin?"
 msgstr "Enjoy the plugin?"
 
-#: lib/settings.php:452
+#: lib/settings.php:453
 #, php-format
 msgid ""
 "<a href=\"%s\" class=\"admin-twitter-link\">Tweet about it</a> and consider "
@@ -307,11 +311,11 @@ msgstr ""
 "<a href=\"%s\" class=\"admin-twitter-link\">Tweet about it</a> and consider "
 "donating."
 
-#: lib/settings.php:454
+#: lib/settings.php:455
 msgid "Donate:"
 msgstr "Donate:"
 
-#: lib/settings.php:456
+#: lib/settings.php:457
 msgid ""
 "A lot of hard work goes into building plugins - support your open source "
 "developers. Include your twitter username and I'll send you a shout out for "
@@ -321,19 +325,19 @@ msgstr ""
 "developers. Include your twitter username and I'll send you a shout out for "
 "your generosity. Thank you!"
 
-#: lib/settings.php:476
+#: lib/settings.php:477
 msgid "API Status Check"
 msgstr "API Status Check"
 
-#: lib/settings.php:483
+#: lib/settings.php:484
 msgid "Check Status"
 msgstr "Check Status"
 
-#: lib/settings.php:501
+#: lib/settings.php:502
 msgid "Data Options"
 msgstr "Data Options"
 
-#: lib/settings.php:504
+#: lib/settings.php:505
 msgid ""
 "Click the button below to refresh the click count data for all posts with a "
 "REFR link."
@@ -341,49 +345,52 @@ msgstr ""
 "Click the button below to refresh the click count data for all posts with a "
 "REFR link."
 
-#: lib/settings.php:505
+#: lib/settings.php:506
 msgid "Refresh Click Counts"
 msgstr "Refresh Click Counts"
 
-#: lib/settings.php:511
+#: lib/settings.php:512
 msgid "Click the button below to attempt an import of existing REFR links."
 msgstr "Click the button below to attempt an import of existing REFR links."
 
-#: lib/settings.php:512
+#: lib/settings.php:513
 msgid "Import Existing URLs"
 msgstr "Import Existing URLs"
 
-#: lib/settings.php:518
+#: lib/settings.php:519
 msgid "Using Ozh's plugin? Click here to convert the existing meta keys"
 msgstr "Using Ozh's plugin? Click here to convert the existing meta keys"
 
-#: lib/settings.php:519
+#: lib/settings.php:520
 msgid "Convert Meta Keys"
 msgstr "Convert Meta Keys"
 
-#: lib/settings.php:535
+#: lib/settings.php:536
 msgid "Additional Links"
 msgstr "Additional Links"
 
-#: lib/settings.php:538
+#: lib/settings.php:539
 msgid "REFR homepage"
 msgstr "REFR homepage"
 
-#: lib/settings.php:539
+#: lib/settings.php:540
 msgid "Plugin on WP.org"
 msgstr "Plugin on WP.org"
 
-#: lib/settings.php:540
+#: lib/settings.php:541
 msgid "Plugin on GitHub"
 msgstr "Plugin on GitHub"
 
-#: lib/settings.php:541
+#: lib/settings.php:542
 msgid "Support Forum"
 msgstr "Support Forum"
 
-#: lib/settings.php:556
+#: lib/settings.php:557
 msgid "PayPal - The safer, easier way to pay online!"
 msgstr "PayPal - The safer, easier way to pay online!"
+
+#~ msgid "Enter your custom REFR URL"
+#~ msgstr "Enter your custom REFR URL"
 
 #~ msgid "Use POST requests"
 #~ msgstr "Use POST requests"
