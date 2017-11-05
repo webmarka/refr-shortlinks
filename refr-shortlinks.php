@@ -5,7 +5,7 @@
  * Description: Creates a shortlink using REFR and stores as postmeta.
  * Author: Marc-Antoine Minville (original author : Andrew Norcross)
  * Author https://refr.ca/
- * Version: 2.1.1
+ * Version: 1.0.0
  * Text Domain: wprefr
  * Domain Path: languages
  * GitHub Plugin URI: https://github.com/webmarka/refr-shortlinks

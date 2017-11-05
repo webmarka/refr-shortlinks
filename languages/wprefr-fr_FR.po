@@ -1,0 +1,410 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: wprefr\n"
+"POT-Creation-Date: 2017-11-04 21:02-0400\n"
+"PO-Revision-Date: 2017-11-05 05:31-0500\n"
+"Last-Translator: Marc-Antoine Minville <traductions@kajoom.org>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"X-Poedit-KeywordsList: _;__;_e;gettext;gettext_noop\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: lib\n"
+
+#: lib/admin.php:73
+msgid "Get Shortlink"
+msgstr "Obtenir le lien court"
+
+#: lib/admin.php:74
+msgid "There was an error with your request."
+msgstr "Il y a eu une erreur avec votre requête."
+
+#: lib/admin.php:105
+msgid "REFR Shortlink"
+msgstr "Lien court REFR"
+
+#: lib/admin.php:290
+msgid "REFR Clicks"
+msgstr "Clics REFR"
+
+#: lib/ajax.php:67 lib/ajax.php:195 lib/ajax.php:283 lib/ajax.php:361
+#: lib/ajax.php:460 lib/ajax.php:538 lib/ajax.php:604 lib/ajax.php:677
+msgid "The nonce did not validate."
+msgstr "Le nonce n'a pas validé.Le nonce n'a pas validé."
+
+#: lib/ajax.php:76 lib/ajax.php:204 lib/ajax.php:259 lib/ajax.php:328
+#: lib/ajax.php:469 lib/ajax.php:547 lib/ajax.php:686
+msgid "No API data has been entered."
+msgstr "Aucune donnée API n'a été entrée.Aucune donnée API n'a été entrée."
+
+#: lib/ajax.php:85 lib/ajax.php:213 lib/ajax.php:268 lib/ajax.php:337
+msgid "No post ID was present."
+msgstr "Aucun post ID n'était présent."
+
+#: lib/ajax.php:97 lib/ajax.php:349
+msgid "This is not a valid post status."
+msgstr "Ce n'est pas un statut de publication valide."
+
+#: lib/ajax.php:106 lib/ajax.php:370
+msgid "A URL already exists."
+msgstr "Une URL existe déjà."
+
+#: lib/ajax.php:115 lib/ajax.php:379
+msgid "No permalink could be retrieved."
+msgstr "Aucun lien permanent n'a pu être récupéré."
+
+#: lib/ajax.php:134 lib/ajax.php:400 lib/ajax.php:701
+msgid "There was an unknown API error."
+msgstr "Il y avait une erreur d'API inconnue."
+
+#: lib/ajax.php:160 lib/ajax.php:426
+msgid "You have created a new REFR link."
+msgstr ""
+"Vous avez créé un nouveau lien REFR.Vous avez créé un nouveau lien REFR."
+
+#: lib/ajax.php:170 lib/ajax.php:435 lib/ajax.php:513 lib/ajax.php:772
+msgid "There was an unknown error."
+msgstr "Il y a eu une erreur inconnue."
+
+#: lib/ajax.php:225
+msgid "There is no URL to delete."
+msgstr "Il n'y a pas d'URL à supprimer.Il n'y a pas d'URL à supprimer."
+
+#: lib/ajax.php:236
+msgid "You have removed your REFR link."
+msgstr "Vous avez supprimé votre lien REFR."
+
+#: lib/ajax.php:305
+msgid "Your REFR click count has been updated"
+msgstr "Le compte de clic REFR a été mis à jour"
+
+#: lib/ajax.php:494 lib/helper.php:725
+msgid "The status of the REFR API could not be determined."
+msgstr "L'état de l'API REFR n'a pas pu être déterminé."
+
+#: lib/ajax.php:556
+msgid "There are no items with stored URLs."
+msgstr "Il n'y a aucun article avec des URL stockées."
+
+#: lib/ajax.php:582
+msgid "The click counts have been updated"
+msgstr "Le nombre de clics a été mis à jour"
+
+#: lib/ajax.php:616
+msgid "There are no meta keys to convert."
+msgstr "Il n'y a pas de clés méta à convertir."
+
+#: lib/ajax.php:643
+msgid "There are no keys matching this criteria. Please try again."
+msgstr "Il n'y a pas de clé correspondant à ce critère. Veuillez réessayer."
+
+#: lib/ajax.php:719
+msgid "There was no available link data to import."
+msgstr "Il n'y avait pas de données de liaison disponibles à importer."
+
+#: lib/ajax.php:731
+msgid "There were no matching links to import."
+msgstr "Il n'y a pas de liens correspondants à importer."
+
+#: lib/ajax.php:756
+msgid "The data could not be imported."
+msgstr "Les données n'ont pas pu être importées."
+
+#: lib/ajax.php:764
+msgid "All available REFR data has been imported."
+msgstr "Toutes les données REFR disponibles ont été importées."
+
+#: lib/front.php:111
+msgid "Shortlink:"
+msgstr "Lien court : "
+
+#: lib/front.php:112
+msgid "click to highlight"
+msgstr "cliquer pour sélectionner"
+
+#: lib/helper.php:225
+msgid "No API action was provided."
+msgstr "Aucune action d'API n'a été fournie."
+
+#: lib/helper.php:234
+msgid "The API action was invalid."
+msgstr "L'action de l'API était invalide.L'action de l'API était invalide."
+
+#: lib/helper.php:243
+msgid "No data was returned from the API call."
+msgstr "Aucune donnée n'a été renvoyée à partir de l'appel de l'API."
+
+#: lib/helper.php:252
+msgid "The user requesting the URL does not have authorization."
+msgstr "L'utilisateur qui demande l'URL n'a pas d'autorisation."
+
+#: lib/helper.php:281
+msgid "The response from the API was empty."
+msgstr "La réponse de l'API était vide.La réponse de l'API était vide."
+
+#: lib/helper.php:302
+#, php-format
+msgid "The API call returned a %s response code."
+msgstr "L'appel d'API a renvoyé un code de réponse %s."
+
+#: lib/helper.php:314
+msgid "No data was present in the body from the API call."
+msgstr ""
+"Aucune donnée n'était présente dans le corps à partir de l'appel de l'API."
+
+#: lib/helper.php:335
+msgid "The JSON could not be parsed."
+msgstr "Le JSON n'a pas pu être analysé."
+
+#: lib/helper.php:440
+msgid "No API data was returned."
+msgstr "Aucune donnée API n'a été renvoyée."
+
+#: lib/helper.php:580
+msgid "optional keyword"
+msgstr "mot-clé optionnel"
+
+#: lib/helper.php:584
+msgid "a REFR link cannot be generated until the post is saved."
+msgstr ""
+"Un lien REFR ne peut pas être généré tant que le message n'est pas "
+"sauvegardé."
+
+#: lib/helper.php:611
+msgid "Create REFR link"
+msgstr "Créer un lien REFR"
+
+#: lib/helper.php:646
+msgid "Delete Link"
+msgstr "Supprimer le lien"
+
+#: lib/helper.php:672
+msgid "Create REFR"
+msgstr "Créer un REFR"
+
+#: lib/helper.php:687
+msgid "Update REFR"
+msgstr "Mettre à jour le REFR"
+
+#: lib/helper.php:734
+msgid "The REFR API is currently accessible."
+msgstr "L'API REFR est actuellement accessible."
+
+#: lib/helper.php:744
+msgid "The REFR API is currently NOT accessible."
+msgstr "L'API REFR n'est actuellement pas accessible."
+
+#: lib/settings.php:65
+msgid "Settings"
+msgstr "Paramètres"
+
+#: lib/settings.php:80
+msgid "REFR Settings"
+msgstr "Paramètres REFR"
+
+#: lib/settings.php:215
+msgid "Your settings have been saved."
+msgstr "Vos paramètres ont été enregistrés."
+
+#: lib/settings.php:223
+msgid "Your settings have been deleted."
+msgstr "Vos paramètres ont été supprimés."
+
+#: lib/settings.php:261
+msgid "REFR Shortlinks Settings"
+msgstr "Paramètres de raccourcis REFR"
+
+#: lib/settings.php:270
+msgid ""
+"Below are the basic settings for the REFR creator. A reminder, your REFR "
+"install cannot be public."
+msgstr ""
+"Voici les paramètres de base pour le créateur de REFR. Un rappel, votre "
+"installation REFR ne peut pas être publique."
+
+#: lib/settings.php:295
+msgid "REFR Custom URL"
+msgstr "REFR URL personnalisée"
+
+#: lib/settings.php:298
+msgid "Enter the domain URL for your REFR API"
+msgstr "Entrez l'URL du domaine pour votre API REFR"
+
+#: lib/settings.php:303
+msgid "REFR API Signature Key"
+msgstr "Clé de signature de l'API REFR"
+
+#: lib/settings.php:307
+msgid "Found in the tools section on your REFR admin page."
+msgstr "Trouvé dans la section outils sur votre page d'administration REFR."
+
+#: lib/settings.php:312
+msgid "Auto generate links"
+msgstr "Générer automatiquement des liens"
+
+#: lib/settings.php:315
+msgid "Create a REFR link when a post is saved."
+msgstr "Créez un lien REFR lorsqu'un message est enregistré."
+
+#: lib/settings.php:320
+msgid "Scheduled Content"
+msgstr "Contenu planifié"
+
+#: lib/settings.php:323
+msgid "Create a REFR link when a scheduled post publishes."
+msgstr "Créez un lien REFR lors de la publication d'un message planifié."
+
+#: lib/settings.php:328
+msgid "Use REFR for shortlink"
+msgstr "Utilisez REFR pour le lien court"
+
+#: lib/settings.php:331
+msgid "Use the REFR link wherever wp_shortlink is fired"
+msgstr "Utiliser le lien REFR partout où wp_shortlink est déclenché."
+
+#: lib/settings.php:336
+msgid "Include Custom Post Types"
+msgstr "Inclure les types de contenus personnalisés"
+
+#: lib/settings.php:339
+msgid "Display the REFR creator on public custom post types"
+msgstr ""
+"Afficher le créateur REFR sur les types de publications personnalisées "
+"publiquesAfficher le créateur REFR sur les types de publications "
+"personnalisées publiques"
+
+#: lib/settings.php:344
+msgid "Select the types to include"
+msgstr "Sélectionnez les types à inclure"
+
+#: lib/settings.php:351
+msgid "Save Changes"
+msgstr "Sauvegarder les modifications"
+
+#: lib/settings.php:444
+msgid "About the Plugin"
+msgstr "À propos du Plugin"
+
+#: lib/settings.php:447
+msgid "Questions?"
+msgstr "Questions ?"
+
+#: lib/settings.php:449
+#, php-format
+msgid ""
+"Talk to <a href=\"%s\" class=\"external\">@norcross</a> on twitter or visit "
+"the <a href=\"%s\" class=\"external\">plugin support forum</a> for bugs or "
+"feature requests."
+msgstr ""
+"Parlez à <a href=\"%s\" class=\"external\">@norcross</a> sur twitter ou "
+"visitez le <a href=\"%s\" class=\"external\"> forum de prise en charge des "
+"plugins </a> pour les bugs ou des demandes de fonctionnalités."
+
+#: lib/settings.php:451
+msgid "Enjoy the plugin?"
+msgstr "Vous aimez ce plugin ?"
+
+#: lib/settings.php:453
+#, php-format
+msgid ""
+"<a href=\"%s\" class=\"admin-twitter-link\">Tweet about it</a> and consider "
+"donating."
+msgstr ""
+"<a href=\"%s\" class=\"admin-twitter-link\">Tweetez</a> et pensez aussi à "
+"faire un don."
+
+#: lib/settings.php:455
+msgid "Donate:"
+msgstr "Faire un don :"
+
+#: lib/settings.php:457
+msgid ""
+"A lot of hard work goes into building plugins - support your open source "
+"developers. Include your twitter username and I'll send you a shout out for "
+"your generosity. Thank you!"
+msgstr ""
+"Beaucoup de dur travail va dans la construction de plugins - soutenez vos "
+"développeurs open source. Incluez votre nom d'utilisateur Twitter et je "
+"vous enverrai un message pour votre générosité. Je vous remercie!"
+
+#: lib/settings.php:477
+msgid "API Status Check"
+msgstr "Vérification du statut de l'API"
+
+#: lib/settings.php:484
+msgid "Check Status"
+msgstr "Vérifier le statut"
+
+#: lib/settings.php:502
+msgid "Data Options"
+msgstr "Options de donnéesOptions de données"
+
+#: lib/settings.php:505
+msgid ""
+"Click the button below to refresh the click count data for all posts with a "
+"REFR link."
+msgstr ""
+"Cliquez sur le bouton ci-dessous pour actualiser les données de décompte "
+"des clics pour tous les messages avec un lien REFR."
+
+#: lib/settings.php:506
+msgid "Refresh Click Counts"
+msgstr "Actualiser le nombre de clics"
+
+#: lib/settings.php:512
+msgid "Click the button below to attempt an import of existing REFR links."
+msgstr ""
+"Cliquez sur le bouton ci-dessous pour tenter une importation de liens REFR "
+"existants."
+
+#: lib/settings.php:513
+msgid "Import Existing URLs"
+msgstr "Importer des URL existantes"
+
+#: lib/settings.php:519
+msgid "Using Ozh's plugin? Click here to convert the existing meta keys"
+msgstr ""
+"Vous utilisez le plugin Ozh? Cliquez ici pour convertir les clés méta "
+"existantes"
+
+#: lib/settings.php:520
+msgid "Convert Meta Keys"
+msgstr "Convertir les clés méta"
+
+#: lib/settings.php:536
+msgid "Additional Links"
+msgstr "Liens supplémentairesLiens supplémentaires"
+
+#: lib/settings.php:539
+msgid "REFR homepage"
+msgstr "Page d'accueil REFR"
+
+#: lib/settings.php:540
+msgid "Plugin on WP.org"
+msgstr "Plugin sur WP.org"
+
+#: lib/settings.php:541
+msgid "Plugin on GitHub"
+msgstr "Plugin sur GitHubPlugin sur GitHub"
+
+#: lib/settings.php:542
+msgid "Support Forum"
+msgstr "Forum d'entraide"
+
+#: lib/settings.php:557
+msgid "PayPal - The safer, easier way to pay online!"
+msgstr "PayPal - Le moyen le plus sûr et le plus simple de payer en ligne!"
+
+#~ msgid "Enter your custom REFR URL"
+#~ msgstr "Enter your custom REFR URL"
+
+#~ msgid "Use POST requests"
+#~ msgstr "Use POST requests"
+
+#~ msgid "Check this box if you are getting API permission errors."
+#~ msgstr "Check this box if you are getting API permission errors."
