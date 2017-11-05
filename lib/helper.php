@@ -22,10 +22,10 @@
 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-if ( ! class_exists( 'YOURLSCreator_Helper' ) ) {
+if ( ! class_exists( 'REFRCreator_Helper' ) ) {
 
 // Start up the engine
-class YOURLSCreator_Helper
+class REFRCreator_Helper
 {
 
 	/**
@@ -35,10 +35,10 @@ class YOURLSCreator_Helper
 	 * @param  string $key [description]
 	 * @return [type]      [description]
 	 */
-	public static function get_yourls_option( $key = '' ) {
+	public static function get_refr_option( $key = '' ) {
 
 		// fetch the data
-		$data   = get_option( 'yourls_options' );
+		$data   = get_option( 'refr_options' );
 
 		// bail if none exists
 		if ( empty( $data ) ) {
@@ -60,14 +60,14 @@ class YOURLSCreator_Helper
 	}
 
 	/**
-	 * get a post meta item with YOURLS data
+	 * get a post meta item with REFR data
 	 *
 	 * @param  integer $post_id  [description]
 	 * @param  string  $key      [description]
 	 * @param  string  $fallback [description]
 	 * @return [type]            [description]
 	 */
-	public static function get_yourls_meta( $post_id = 0, $key = '_yourls_url', $fallback = false ) {
+	public static function get_refr_meta( $post_id = 0, $key = '_refr_url', $fallback = false ) {
 
 		// get my item
 		$item	= get_post_meta( $post_id, $key, true );
@@ -82,14 +82,14 @@ class YOURLSCreator_Helper
 	}
 
 	/**
-	 * get the post types that YOURLS is enabled for
+	 * get the post types that REFR is enabled for
 	 *
 	 * @return [type] [description]
 	 */
-	public static function get_yourls_types() {
+	public static function get_refr_types() {
 
 		// fetch any custom post types and merge with the built in
-		$custom = self::get_yourls_option( 'typ' );
+		$custom = self::get_refr_option( 'typ' );
 		$built  = array( 'post' => 'post', 'page' => 'page' );
 
 		// return the full array
@@ -100,15 +100,15 @@ class YOURLSCreator_Helper
 	 * get the post statuses allowed
 	 * @return [type] [description]
 	 */
-	public static function get_yourls_status( $action = '' ) {
+	public static function get_refr_status( $action = '' ) {
 
 		// return only publish for saving
 		if ( ! empty( $action ) && $action == 'save' ) {
-			return apply_filters( 'yourls_post_status', array( 'publish' ), $action  );
+			return apply_filters( 'refr_post_status', array( 'publish' ), $action  );
 		}
 
 		// return the default
-		return apply_filters( 'yourls_post_status', array( 'publish', 'future' ), $action );
+		return apply_filters( 'refr_post_status', array( 'publish', 'future' ), $action );
 	}
 
 	/**
@@ -117,10 +117,10 @@ class YOURLSCreator_Helper
 	 * @param  integer $post_id [description]
 	 * @return [type]           [description]
 	 */
-	public static function get_yourls_keyword( $post_id = 0 ) {
+	public static function get_refr_keyword( $post_id = 0 ) {
 
 		// check for a keyword
-		$keywd  = get_post_meta( $post_id, '_yourls_keyword', true );
+		$keywd  = get_post_meta( $post_id, '_refr_keyword', true );
 
 		// return
 		return ! empty( $keywd ) ? $keywd : false;
@@ -133,10 +133,10 @@ class YOURLSCreator_Helper
 	 * @param  string $key [description]
 	 * @return [type]      [description]
 	 */
-	public static function get_yourls_api_data( $key = '' ) {
+	public static function get_refr_api_data( $key = '' ) {
 
 		// fetch the stored option array
-		$option = self::get_yourls_option();
+		$option = self::get_refr_option();
 
 		// if anything is missing, return false
 		if ( empty( $option ) || empty( $option['url'] ) || empty( $option['api'] ) ) {
@@ -151,11 +151,11 @@ class YOURLSCreator_Helper
 	}
 
 	/**
-	 * get all the post IDs that contain the YOURLS url
+	 * get all the post IDs that contain the REFR url
 	 *
 	 * @return array the post IDs containing the meta key
 	 */
-	public static function get_yourls_post_ids( $key = '_yourls_url' ) {
+	public static function get_refr_post_ids( $key = '_refr_url' ) {
 
 		// call the global database
 		global $wpdb;
@@ -179,10 +179,10 @@ class YOURLSCreator_Helper
 	 *
 	 * @return string   the URL
 	 */
-	public static function get_yourls_api_url() {
+	public static function get_refr_api_url() {
 
 		// fetch the stored base URL link
-		$stored = self::get_yourls_api_data( 'url' );
+		$stored = self::get_refr_api_data( 'url' );
 
 		// parse the link
 		$parsed = parse_url( esc_url( $stored ) );
@@ -201,21 +201,21 @@ class YOURLSCreator_Helper
 		}
 
 		// build the API link
-		$link   = self::strip_trailing_slash( $base ) . '/yourls-api.php';
+		$link   = self::strip_trailing_slash( $base ) . '/refr-api.php';
 
 		// return it with optional filter
-		return apply_filters( 'yourls_api_url', $link );
+		return apply_filters( 'refr_api_url', $link );
 	}
 
 	/**
-	 * make a API request to the YOURLS server
+	 * make a API request to the REFR server
 	 *
 	 * @param  string $action [description]
 	 * @param  array  $args   [description]
 	 * @param  string $format [description]
 	 * @return [type]         [description]
 	 */
-	public static function run_yourls_api_call( $action = '', $args = array(), $user = true, $format = 'json', $decode = true ) {
+	public static function run_refr_api_call( $action = '', $args = array(), $user = true, $format = 'json', $decode = true ) {
 
 		// bail if no action is passed
 		if ( empty( $action ) ) {
@@ -236,7 +236,7 @@ class YOURLSCreator_Helper
 		}
 
 		// bail if the API key or URL have not been entered
-		if(	false === $apikey = self::get_yourls_api_data( 'key' ) ) {
+		if(	false === $apikey = self::get_refr_api_data( 'key' ) ) {
 			return array(
 				'success'   => false,
 				'errcode'   => 'NO_API_DATA',
@@ -245,7 +245,7 @@ class YOURLSCreator_Helper
 		}
 
 		// only fire if user has the option
-		if( false !== $user && false === $check = YOURLSCreator_Helper::check_yourls_cap( 'ajax' ) ) {
+		if( false !== $user && false === $check = REFRCreator_Helper::check_refr_cap( 'ajax' ) ) {
 			return array(
 				'success'   => false,
 				'errcode'   => 'INVALID_USER',
@@ -260,7 +260,7 @@ class YOURLSCreator_Helper
 		$args   = ! empty( $args ) ? array_merge( $args, $base ) : $base;
 
 		// construct the args for a remote POST
-		$build  = wp_remote_post( self::get_yourls_api_url(), array(
+		$build  = wp_remote_post( self::get_refr_api_url(), array(
 			'method'       => 'POST',
 			'timeout'      => 45,
 			'redirection'  => 5,
@@ -353,22 +353,22 @@ class YOURLSCreator_Helper
 	public static function get_single_shorturl( $post_id = 0, $check = 'sav' ) {
 
 		// make sure we're working with an approved post type
-		if ( ! in_array( get_post_type( $post_id ), self::get_yourls_types() ) ) {
+		if ( ! in_array( get_post_type( $post_id ), self::get_refr_types() ) ) {
 			return;
 		}
 
 		// bail if the API key or URL have not been entered
-		if(	false === $api = self::get_yourls_api_data() ) {
+		if(	false === $api = self::get_refr_api_data() ) {
 			return;
 		}
 
 		// bail if user hasn't checked the box
-		if ( false === $onschd = self::get_yourls_option( $check ) ) {
+		if ( false === $onschd = self::get_refr_option( $check ) ) {
 		   	return;
 		}
 
 		// check for a link and bail if one exists
-		if ( false !== $exist = self::get_yourls_meta( $post_id ) ) {
+		if ( false !== $exist = self::get_refr_meta( $post_id ) ) {
 			return;
 		}
 
@@ -377,13 +377,13 @@ class YOURLSCreator_Helper
 		$title  = get_the_title( $post_id );
 
 		// check for a keyword
-		$keywd  = self::get_yourls_keyword( $post_id );
+		$keywd  = self::get_refr_keyword( $post_id );
 
 		// set my args for the API call
 		$args   = array( 'url' => esc_url( $url ), 'title' => sanitize_text_field( $title ), 'keyword' => $keywd );
 
 		// make the API call
-		$build  = self::run_yourls_api_call( 'shorturl', $args, false );
+		$build  = self::run_refr_api_call( 'shorturl', $args, false );
 
 		// bail if empty data or error received
 		if ( empty( $build ) || false === $build['success'] ) {
@@ -396,20 +396,20 @@ class YOURLSCreator_Helper
 			$shorturl   = esc_url( $build['data']['shorturl'] );
 
 			// update the post meta
-			update_post_meta( $post_id, '_yourls_url', $shorturl );
-			update_post_meta( $post_id, '_yourls_clicks', '0' );
+			update_post_meta( $post_id, '_refr_url', $shorturl );
+			update_post_meta( $post_id, '_refr_clicks', '0' );
 
 			// do the action after saving
-			do_action( 'yourls_after_url_save', $post_id, $shorturl );
+			do_action( 'refr_after_url_save', $post_id, $shorturl );
 		}
 
 		// we have a keyword and we're going to store it
 		if( ! empty( $keywd ) ) {
 			// update the post meta
-			update_post_meta( $post_id, '_yourls_keyword', $keywd );
+			update_post_meta( $post_id, '_refr_keyword', $keywd );
 		} else {
 			// delete it if none was passed
-			delete_post_meta( $post_id, '_yourls_keyword' );
+			delete_post_meta( $post_id, '_refr_keyword' );
 		}
 	}
 
@@ -422,7 +422,7 @@ class YOURLSCreator_Helper
 	public static function get_single_click_count( $post_id = 0 ) {
 
 		// get the URL
-		$url    = self::get_yourls_meta( $post_id );
+		$url    = self::get_refr_meta( $post_id );
 
 		// a secondary check to see if we have the URL
 		if ( empty( $url ) ) {
@@ -430,7 +430,7 @@ class YOURLSCreator_Helper
 		}
 
 		// make the API call
-		$build  = self::run_yourls_api_call( 'url-stats', array( 'shorturl' => esc_url( $url ) ), false );
+		$build  = self::run_refr_api_call( 'url-stats', array( 'shorturl' => esc_url( $url ) ), false );
 
 		// bail if empty data or error received
 		if ( empty( $build ) || false === $build['success'] ) {
@@ -458,7 +458,7 @@ class YOURLSCreator_Helper
 	 * @param  array  $group [description]
 	 * @return [type]       [description]
 	 */
-	public static function filter_yourls_import( $group = array() ) {
+	public static function filter_refr_import( $group = array() ) {
 
 		// set an empty
 		$data   = array();
@@ -548,8 +548,8 @@ class YOURLSCreator_Helper
 
 		// if we have it, use it
 		if ( ! empty( $post ) && ! empty( $post[0] ) ) {
-			update_post_meta( absint( $post[0] ), '_yourls_url', esc_url( $data['short'] ) );
-			update_post_meta( absint( $post[0] ), '_yourls_clicks', absint( $data['clicks'] ) );
+			update_post_meta( absint( $post[0] ), '_refr_url', esc_url( $data['short'] ) );
+			update_post_meta( absint( $post[0] ), '_refr_clicks', absint( $data['clicks'] ) );
 		}
 
 		// and return
@@ -557,33 +557,33 @@ class YOURLSCreator_Helper
 	}
 
 	/**
-	 * get the link box when we dont have a YOURLS link
+	 * get the link box when we dont have a REFR link
 	 *
 	 * @param  string $link [description]
 	 * @return [type]       [description]
 	 */
-	public static function get_yourls_subbox( $post_id = 0 ) {
+	public static function get_refr_subbox( $post_id = 0 ) {
 
 		// check for a keyword
-		$keywd  = get_post_meta( $post_id, '_yourls_keyword', true );
+		$keywd  = get_post_meta( $post_id, '_refr_keyword', true );
 
 		// an empty
 		$box    = '';
 
 		// display the box
-		$box   .= '<p class="yourls-meta-block yourls-input-block">';
+		$box   .= '<p class="refr-meta-block refr-input-block">';
 
 			// input field for the optional keyword
-			$box   .= '<input id="yourls-keyw" class="yourls-keyw" size="20" type="text" name="yourls-keyw" value="' . esc_attr( $keywd ) . '" tabindex="501" />';
+			$box   .= '<input id="refr-keyw" class="refr-keyw" size="20" type="text" name="refr-keyw" value="' . esc_attr( $keywd ) . '" tabindex="501" />';
 
 			// simple instruction
 			$box   .= '<span class="description">' . __( 'optional keyword', 'wprefr' ) . '</span>';
 
 		// first check our post status
 		if ( ! in_array( get_post_status( $post_id ), array( 'publish', 'future', 'pending' ) ) ) {
-			$box   .= '<p class="yourls-meta-block howto">' . __( 'a YOURLS link cannot be generated until the post is saved.', 'wprefr' ) . '</p>';
+			$box   .= '<p class="refr-meta-block howto">' . __( 'a REFR link cannot be generated until the post is saved.', 'wprefr' ) . '</p>';
 		} else {
-			$box   .= self::yourls_submit_box( $post_id );
+			$box   .= self::refr_submit_box( $post_id );
 		}
 
 		// and return it
@@ -596,22 +596,22 @@ class YOURLSCreator_Helper
 	 * @param  integer $post_id [description]
 	 * @return [type]           [description]
 	 */
-	public static function yourls_submit_box( $post_id = 0 ) {
+	public static function refr_submit_box( $post_id = 0 ) {
 
 		// make the nonce
-		$nonce  = wp_create_nonce( 'yourls_editor_create' );
+		$nonce  = wp_create_nonce( 'refr_editor_create' );
 
 		// our empty
 		$box    = '';
 
 		// display the box
-		$box   .= '<p class="yourls-meta-block yourls-submit-block">';
+		$box   .= '<p class="refr-meta-block refr-submit-block">';
 
 			// button to actually fetch the link
-			$box   .= '<input type="button" class="button button-secondary button-small yourls-api" id="yourls-get" name="yourls-get" value="' . __( 'Create YOURLS link', 'wprefr' ) . '" tabindex="502" data-nonce="' . esc_attr( $nonce ) . '" data-post-id="' . absint( $post_id ) . '" />';
+			$box   .= '<input type="button" class="button button-secondary button-small refr-api" id="refr-get" name="refr-get" value="' . __( 'Create REFR link', 'wprefr' ) . '" tabindex="502" data-nonce="' . esc_attr( $nonce ) . '" data-post-id="' . absint( $post_id ) . '" />';
 
 			// the spinner
-			$box   .= '<span class="spinner yourls-spinner"></span>';
+			$box   .= '<span class="spinner refr-spinner"></span>';
 
 		$box   .= '</p>';
 
@@ -620,45 +620,45 @@ class YOURLSCreator_Helper
 	}
 
 	/**
-	 * get the link box when we have a YOURLS link
+	 * get the link box when we have a REFR link
 	 *
 	 * @param  string  $link    [description]
 	 * @param  integer $post_id [description]
 	 * @param  integer $count   [description]
 	 * @return [type]           [description]
 	 */
-	public static function get_yourls_linkbox( $link = '', $post_id = 0, $count = 0 ) {
+	public static function get_refr_linkbox( $link = '', $post_id = 0, $count = 0 ) {
 
 		// make the nonce
-		$nonce  = wp_create_nonce( 'yourls_editor_delete' );
+		$nonce  = wp_create_nonce( 'refr_editor_delete' );
 
 		// check for a keyword
-		$keywd  = get_post_meta( $post_id, '_yourls_keyword', true );
+		$keywd  = get_post_meta( $post_id, '_refr_keyword', true );
 
 		// an empty
 		$box    = '';
 
 		// wrap the paragraph
-		$box   .= '<p class="yourls-meta-block yourls-exist-block">';
+		$box   .= '<p class="refr-meta-block refr-exist-block">';
 
-			$box   .= '<input id="yourls-link" title="click to highlight" class="yourls-link-input" type="text" name="yourls-link" value="' . esc_url( $link ) . '" readonly="readonly" tabindex="501" onclick="this.focus();this.select()" />';
+			$box   .= '<input id="refr-link" title="click to highlight" class="refr-link-input" type="text" name="refr-link" value="' . esc_url( $link ) . '" readonly="readonly" tabindex="501" onclick="this.focus();this.select()" />';
 
-			$box   .= '<span class="dashicons dashicons-no yourls-delete" title="' . __( 'Delete Link', 'wprefr' ) . '" data-post-id="' . absint( $post_id ) . '" data-nonce="' . esc_attr( $nonce ) . '"></span>';
+			$box   .= '<span class="dashicons dashicons-no refr-delete" title="' . __( 'Delete Link', 'wprefr' ) . '" data-post-id="' . absint( $post_id ) . '" data-nonce="' . esc_attr( $nonce ) . '"></span>';
 
 		$box   .= '</p>';
 
 		// the box with the counting
-		$box   .= '<p class="yourls-meta-block howto"> ' . sprintf( _n( 'Your YOURLS link has generated %d click.', 'Your YOURLS link has generated %d clicks.', absint( $count ), 'wprefr' ), absint( $count ) ) .'</p>';
+		$box   .= '<p class="refr-meta-block howto"> ' . sprintf( _n( 'Your REFR link has generated %d click.', 'Your REFR link has generated %d clicks.', absint( $count ), 'wprefr' ), absint( $count ) ) .'</p>';
 
 		// hidden field for the optional keyword
-		$box   .= '<input id="yourls-keyw" class="yourls-keyw" type="hidden" name="yourls-keyw" value="' . esc_attr( $keywd ) . '" />';
+		$box   .= '<input id="refr-keyw" class="refr-keyw" type="hidden" name="refr-keyw" value="' . esc_attr( $keywd ) . '" />';
 
 		// and return it
 		return $box;
 	}
 
 	/**
-	 * build the inline action row for creating a YOURLS link
+	 * build the inline action row for creating a REFR link
 	 *
 	 * @param  integer $post_id [description]
 	 * @return [type]           [description]
@@ -666,14 +666,14 @@ class YOURLSCreator_Helper
 	public static function create_row_action( $post_id = 0 ) {
 
 		// make the nonce
-		$nonce  = wp_create_nonce( 'yourls_inline_create_' . absint( $post_id ) );
+		$nonce  = wp_create_nonce( 'refr_inline_create_' . absint( $post_id ) );
 
 		// return the link
-		return '<a href="#" class="yourls-admin-row-link yourls-admin-create" data-nonce="' . esc_attr( $nonce ) . '" data-post-id="' . absint( $post_id ) . '">' . __( 'Create YOURLS', 'wprefr' ) . '</a>';
+		return '<a href="#" class="refr-admin-row-link refr-admin-create" data-nonce="' . esc_attr( $nonce ) . '" data-post-id="' . absint( $post_id ) . '">' . __( 'Create REFR', 'wprefr' ) . '</a>';
 	}
 
 	/**
-	 * build the inline action row for updating a YOURLS link
+	 * build the inline action row for updating a REFR link
 	 *
 	 * @param  integer $post_id [description]
 	 * @return [type]           [description]
@@ -681,10 +681,10 @@ class YOURLSCreator_Helper
 	public static function update_row_action( $post_id = 0 ) {
 
 		// make the nonce
-		$nonce  = wp_create_nonce( 'yourls_inline_update_' . absint( $post_id ) );
+		$nonce  = wp_create_nonce( 'refr_inline_update_' . absint( $post_id ) );
 
 		// return the link
-		return '<a href="#" class="yourls-admin-row-link yourls-admin-update" data-nonce="' . esc_attr( $nonce ) . '" data-post-id="' . absint( $post_id ) . '">' . __( 'Update YOURLS', 'wprefr' ) . '</a>';
+		return '<a href="#" class="refr-admin-row-link refr-admin-update" data-nonce="' . esc_attr( $nonce ) . '" data-post-id="' . absint( $post_id ) . '">' . __( 'Update REFR', 'wprefr' ) . '</a>';
 	}
 
 	/**
@@ -715,14 +715,14 @@ class YOURLSCreator_Helper
 	public static function get_api_status_data() {
 
 		// fetch the option key we stored
-		if ( false === $check = get_option( 'yourls_api_test' ) ) {
+		if ( false === $check = get_option( 'refr_api_test' ) ) {
 			return;
 		}
 
 		// set a default data aray
 		$data   = array(
 			'icon'  => '<span class="api-status-icon api-status-icon-unknown"></span>',
-			'text'  => __( 'The status of the YOURLS API could not be determined.', 'wprefr' )
+			'text'  => __( 'The status of the REFR API could not be determined.', 'wprefr' )
 		);
 
 		// handle the success
@@ -731,7 +731,7 @@ class YOURLSCreator_Helper
 			// return the icon and text
 			$data   = array(
 				'icon'  => '<span class="api-status-icon api-status-icon-good"></span>',
-				'text'  => __( 'The YOURLS API is currently accessible.', 'wprefr' )
+				'text'  => __( 'The REFR API is currently accessible.', 'wprefr' )
 			);
 		}
 
@@ -741,7 +741,7 @@ class YOURLSCreator_Helper
 			// return the icon and text
 			$data   = array(
 				'icon'  => '<span class="api-status-icon api-status-icon-bad"></span>',
-				'text'  => __( 'The YOURLS API is currently NOT accessible.', 'wprefr' )
+				'text'  => __( 'The REFR API is currently NOT accessible.', 'wprefr' )
 			);
 		}
 
@@ -759,7 +759,7 @@ class YOURLSCreator_Helper
 	public static function prepare_api_keyword( $string = '' ) {
 
 		// check for the filter
-		$filter = apply_filters( 'yourls_keyword_filter', '/[^A-Za-z0-9]/' );
+		$filter = apply_filters( 'refr_keyword_filter', '/[^A-Za-z0-9]/' );
 
 		// return it
 		return preg_replace( $filter, '', $string );
@@ -788,7 +788,7 @@ class YOURLSCreator_Helper
 		}
 
 		// filter the strip check
-		$strip  = apply_filters( 'yourls_strip_urls', false, $post_id );
+		$strip  = apply_filters( 'refr_strip_urls', false, $post_id );
 
 		// return the URL stripped (or not)
 		return false !== $strip ? self::strip_trailing_slash( $link ) : $link;
@@ -811,10 +811,10 @@ class YOURLSCreator_Helper
 	 * @param  string $cap    [description]
 	 * @return [type]         [description]
 	 */
-	public static function check_yourls_cap( $action = 'display', $cap = 'edit_others_posts' ) {
+	public static function check_refr_cap( $action = 'display', $cap = 'edit_others_posts' ) {
 
 		// set the cap
-		$cap    = apply_filters( 'yourls_user_cap', $cap, $action );
+		$cap    = apply_filters( 'refr_user_cap', $cap, $action );
 
 		// return it
 		return ! current_user_can( $cap ) ? false : true;
@@ -845,7 +845,7 @@ class YOURLSCreator_Helper
 		}
 
 		// Bail out if user does not have permissions
-		if ( false === $check = self::check_yourls_cap( 'save' ) ) {
+		if ( false === $check = self::check_refr_cap( 'save' ) ) {
 			return true;
 		}
 
@@ -860,5 +860,5 @@ class YOURLSCreator_Helper
 }
 
 // Instantiate our class
-new YOURLSCreator_Helper();
+new REFRCreator_Helper();
 

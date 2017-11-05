@@ -25,9 +25,9 @@
 /**
  * display the box with the shortlink
  */
-if ( ! function_exists( 'yourls_display_box' ) ) {
+if ( ! function_exists( 'refr_display_box' ) ) {
 
-	function yourls_display_box( $post_id = 0, $echo = true ) {
+	function refr_display_box( $post_id = 0, $echo = true ) {
 
 		// fetch the post ID if not provided
 		if ( empty( $post_id ) ) {
@@ -45,26 +45,26 @@ if ( ! function_exists( 'yourls_display_box' ) ) {
 		}
 
 		// check for the link
-		if ( false === $link = YOURLSCreator_Helper::get_yourls_meta( $post_id ) ) {
+		if ( false === $link = REFRCreator_Helper::get_refr_meta( $post_id ) ) {
 			return;
 		}
 
 		// echo the box if requested
 		if ( ! empty( $echo ) ) {
-			echo YOURLSCreator_Front::yourls_display( $post_id );
+			echo REFRCreator_Front::refr_display( $post_id );
 		}
 
 		// return the box
-		return YOURLSCreator_Front::yourls_display( $post_id );
+		return REFRCreator_Front::refr_display( $post_id );
 	}
 }
 
 /**
  * display the raw short URL
  */
-if ( ! function_exists( 'get_yourls_shortlink' ) ) {
+if ( ! function_exists( 'get_refr_shortlink' ) ) {
 
-	function get_yourls_shortlink( $post_id = 0, $echo = false ) {
+	function get_refr_shortlink( $post_id = 0, $echo = false ) {
 
 		// fetch the post ID if not provided
 		if ( empty( $post_id ) ) {
@@ -82,7 +82,7 @@ if ( ! function_exists( 'get_yourls_shortlink' ) ) {
 		}
 
 		// check for the link
-		if ( false === $link = YOURLSCreator_Helper::get_yourls_meta( $post_id ) ) {
+		if ( false === $link = REFRCreator_Helper::get_refr_meta( $post_id ) ) {
 			return;
 		}
 

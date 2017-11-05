@@ -2,13 +2,14 @@
 /**
  * Plugin Name: REFR Shortlinks
  * Plugin URI: https://refr.ca/
- * Description: Creates a shortlink using YOURLS and stores as postmeta.
+ * Description: Creates a shortlink using REFR and stores as postmeta.
  * Author: Marc-Antoine Minville (original author : Andrew Norcross)
  * Author https://refr.ca/
  * Version: 2.1.1
  * Text Domain: wprefr
  * Domain Path: languages
- * GitHub Plugin URI: https://github.com/norcross/yourls-link-creator
+ * GitHub Plugin URI: https://github.com/webmarka/refr-shortlinks
+ * Donate link: https://andrewnorcross.com/donate
  */
 /*
  * Copyright 2012 Marc-Antoine Minville (original author : Andrew Norcross)
@@ -28,8 +29,8 @@
  *
  */
 
-if( ! defined( 'YOURLS_BASE' ) ) {
-	define( 'YOURLS_BASE', plugin_basename(__FILE__) );
+if( ! defined( 'REFR_BASE' ) ) {
+	define( 'REFR_BASE', plugin_basename(__FILE__) );
 }
 
 if( ! defined( 'YOURS_DIR' ) ) {
@@ -41,7 +42,7 @@ if( ! defined( 'YOURS_VER' ) ) {
 }
 
 // Start up the engine
-class YOURLSCreator
+class REFRCreator
 {
 	/**
 	 * Static property to hold our singleton instance
@@ -129,18 +130,18 @@ class YOURLSCreator
 	public function schedule_crons() {
 
 		// Optional filter to disable this all together.
-		if ( false === apply_filters( 'yourls_run_cron_jobs', true ) ) {
+		if ( false === apply_filters( 'refr_run_cron_jobs', true ) ) {
 			return;
 		}
 
 		// Schedule the click check.
-		if ( ! wp_next_scheduled( 'yourls_cron' ) ) {
-			wp_schedule_event( time(), 'hourly', 'yourls_cron' );
+		if ( ! wp_next_scheduled( 'refr_cron' ) ) {
+			wp_schedule_event( time(), 'hourly', 'refr_cron' );
 		}
 
 		// Schedule the API ping test.
-		if ( ! wp_next_scheduled( 'yourls_test' ) ) {
-			wp_schedule_event( time(), 'twicedaily', 'yourls_test' );
+		if ( ! wp_next_scheduled( 'refr_test' ) ) {
+			wp_schedule_event( time(), 'twicedaily', 'refr_test' );
 		}
 	}
 
@@ -152,15 +153,15 @@ class YOURLSCreator
 	public function remove_crons() {
 
 		// Fetch the timestamps/
-		$click  = wp_next_scheduled( 'yourls_cron' );
-		$check  = wp_next_scheduled( 'yourls_test' );
+		$click  = wp_next_scheduled( 'refr_cron' );
+		$check  = wp_next_scheduled( 'refr_test' );
 
 		// Remove the jobs.
-		wp_unschedule_event( $click, 'yourls_cron', array() );
-		wp_unschedule_event( $check, 'yourls_test', array() );
+		wp_unschedule_event( $click, 'refr_cron', array() );
+		wp_unschedule_event( $check, 'refr_test', array() );
 	}
 
 } // End the class.
 
 // Instantiate our class.
-$YOURLSCreator = YOURLSCreator::getInstance();
+$REFRCreator = REFRCreator::getInstance();

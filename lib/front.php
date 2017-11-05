@@ -22,20 +22,20 @@
 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-if ( ! class_exists( 'YOURLSCreator_Front' ) ) {
+if ( ! class_exists( 'REFRCreator_Front' ) ) {
 
 // Start up the engine
-class YOURLSCreator_Front
+class REFRCreator_Front
 {
 
 	/**
 	 * This is our constructor
 	 *
-	 * @return YOURLSCreator_Front
+	 * @return REFRCreator_Front
 	 */
 	public function __construct() {
 		add_action( 'wp_head',                      array( $this, 'shortlink_meta'      )           );
-		add_action( 'yourls_display',               array( $this, 'yourls_display'      )           );
+		add_action( 'refr_display',               array( $this, 'refr_display'      )           );
 	}
 
 	/**
@@ -51,7 +51,7 @@ class YOURLSCreator_Front
 		}
 
 		// check options to see if it's enabled
-		if ( false === YOURLSCreator_Helper::get_yourls_option( 'sht' ) ) {
+		if ( false === REFRCreator_Helper::get_refr_option( 'sht' ) ) {
 			return;
 		}
 
@@ -63,12 +63,12 @@ class YOURLSCreator_Front
 			return;
 		}
 
-		// check existing postmeta for YOURLS link
-		if ( false === $link = YOURLSCreator_Helper::get_yourls_meta( $post->ID ) ) {
+		// check existing postmeta for REFR link
+		if ( false === $link = REFRCreator_Helper::get_refr_meta( $post->ID ) ) {
 			return;
 		}
 
-		// got a YOURLS? well then add it
+		// got a REFR? well then add it
 		echo '<link href="' . esc_url( $link ) . '" rel="shortlink">' . "\n";
 	}
 
@@ -77,7 +77,7 @@ class YOURLSCreator_Front
 	 *
 	 * @return [type] [description]
 	 */
-	public function yourls_display( $post_id = 0, $echo = false ) {
+	public function refr_display( $post_id = 0, $echo = false ) {
 
 		// no display exist on non-singular items, so bail
 		if ( ! is_singular() ) {
@@ -100,7 +100,7 @@ class YOURLSCreator_Front
 		}
 
 		// check for the link
-		if ( false === $link = YOURLSCreator_Helper::get_yourls_meta( $post_id ) ) {
+		if ( false === $link = REFRCreator_Helper::get_refr_meta( $post_id ) ) {
 			return;
 		}
 
@@ -108,17 +108,17 @@ class YOURLSCreator_Front
 		$show   = '';
 
 		// build the markup
-		$show  .= '<p class="yourls-display">' . __( 'Shortlink:', 'wprefr' );
-			$show  .= '<input id="yourls-link-' . absint( $post_id ) . '" class="yourls-link" size="28" title="' . __( 'click to highlight', 'wprefr' ) . '" type="url" name="yourls-link-' . absint( $post_id ) . '" value="'. esc_url( $link ) .'" readonly="readonly" tabindex="501" onclick="this.focus();this.select()" />';
+		$show  .= '<p class="refr-display">' . __( 'Shortlink:', 'wprefr' );
+			$show  .= '<input id="refr-link-' . absint( $post_id ) . '" class="refr-link" size="28" title="' . __( 'click to highlight', 'wprefr' ) . '" type="url" name="refr-link-' . absint( $post_id ) . '" value="'. esc_url( $link ) .'" readonly="readonly" tabindex="501" onclick="this.focus();this.select()" />';
 		$show  .= '</p>';
 
 		// echo the box if requested
 		if ( ! empty( $echo ) ) {
-			echo apply_filters( 'yourls_template_tag', $show, $post_id );
+			echo apply_filters( 'refr_template_tag', $show, $post_id );
 		}
 
 		// return the box
-		return apply_filters( 'yourls_template_tag', $show, $post_id );
+		return apply_filters( 'refr_template_tag', $show, $post_id );
 	}
 
 // end class
@@ -128,5 +128,5 @@ class YOURLSCreator_Front
 }
 
 // Instantiate our class
-new YOURLSCreator_Front();
+new REFRCreator_Front();
 

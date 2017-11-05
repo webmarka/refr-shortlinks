@@ -22,19 +22,19 @@
 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-if ( ! class_exists( 'YOURLSCreator_Settings' ) ) {
+if ( ! class_exists( 'REFRCreator_Settings' ) ) {
 
 // Start up the engine
-class YOURLSCreator_Settings
+class REFRCreator_Settings
 {
 
 	/**
 	 * This is our constructor
 	 *
-	 * @return YOURLSCreator_Settings
+	 * @return REFRCreator_Settings
 	 */
 	public function __construct() {
-		add_action( 'admin_menu',                   array( $this, 'yourls_menu_item'    )           );
+		add_action( 'admin_menu',                   array( $this, 'refr_menu_item'    )           );
 		add_action( 'admin_init',                   array( $this, 'reg_settings'        )           );
 		add_action( 'admin_init',                   array( $this, 'store_settings'      )           );
 		add_action( 'admin_notices',                array( $this, 'settings_messages'   )           );
@@ -53,7 +53,7 @@ class YOURLSCreator_Settings
 		static $this_plugin;
 
 		if ( ! $this_plugin ) {
-			$this_plugin = YOURLS_BASE;
+			$this_plugin = REFR_BASE;
 		}
 
 		// check to make sure we are on the correct plugin
@@ -62,7 +62,7 @@ class YOURLSCreator_Settings
 		}
 
 		// buil my link
-		$single = '<a href="' . menu_page_url( 'yourls-settings', 0 ) . '">' . __( 'Settings', 'wprefr' ) . '</a>';
+		$single = '<a href="' . menu_page_url( 'refr-settings', 0 ) . '">' . __( 'Settings', 'wprefr' ) . '</a>';
 
 		// get it in the group
 		array_push( $links, $single );
@@ -72,12 +72,12 @@ class YOURLSCreator_Settings
 	}
 
 	/**
-	 * call the menu page for the YOURLS settings
+	 * call the menu page for the REFR settings
 	 *
 	 * @return void
 	 */
-	public function yourls_menu_item() {
-		add_options_page( __( 'YOURLS Settings', 'wprefr' ), __( 'YOURLS Settings', 'wprefr' ), apply_filters( 'yourls_settings_cap', 'manage_options' ), 'yourls-settings', array( __class__, 'yourls_settings_page' ) );
+	public function refr_menu_item() {
+		add_options_page( __( 'REFR Settings', 'wprefr' ), __( 'REFR Settings', 'wprefr' ), apply_filters( 'refr_settings_cap', 'manage_options' ), 'refr-settings', array( __class__, 'refr_settings_page' ) );
 	}
 
 	/**
@@ -86,7 +86,7 @@ class YOURLSCreator_Settings
 	 * @return
 	 */
 	public function reg_settings() {
-		register_setting( 'yourls_options', 'yourls_options' );
+		register_setting( 'refr_options', 'refr_options' );
 	}
 
 	/**
@@ -97,24 +97,24 @@ class YOURLSCreator_Settings
 	public function store_settings() {
 
 		// make sure we have our settings item
-		if ( empty( $_POST['yourls-options'] ) ) {
+		if ( empty( $_POST['refr-options'] ) ) {
 			return;
 		}
 
 		// verify our nonce
-		if ( ! isset( $_POST['yourls_settings_save'] ) || ! wp_verify_nonce( $_POST['yourls_settings_save'], 'yourls_settings_save_nonce' ) ) {
+		if ( ! isset( $_POST['refr_settings_save'] ) || ! wp_verify_nonce( $_POST['refr_settings_save'], 'refr_settings_save_nonce' ) ) {
 			return;
 		}
 
 		// cast our options as a variable
-		$data   = (array) $_POST['yourls-options'];
+		$data   = (array) $_POST['refr-options'];
 
 		// set an empty
 		$store  = array();
 
 		// check and sanitize the URL
 		if ( ! empty( $data['url'] ) ) {
-			$store['url']   = esc_url( YOURLSCreator_Helper::strip_trailing_slash( $data['url'] ) );
+			$store['url']   = esc_url( REFRCreator_Helper::strip_trailing_slash( $data['url'] ) );
 		}
 
 		// check and sanitize the API key
@@ -144,7 +144,7 @@ class YOURLSCreator_Settings
 
 		// check the each possible CPT
 		if ( ! empty( $data['cpt'] ) && ! empty( $data['typ'] ) ) {
-			$store['typ']   = YOURLSCreator_Helper::sanitize_array_text( $data['typ'] );
+			$store['typ']   = REFRCreator_Helper::sanitize_array_text( $data['typ'] );
 		}
 
 		// filter it
@@ -161,17 +161,17 @@ class YOURLSCreator_Settings
 	 * @param  string $key  [description]
 	 * @return [type]       [description]
 	 */
-	public static function save_redirect_settings( $data = array(), $key = 'yourls-settings' ) {
+	public static function save_redirect_settings( $data = array(), $key = 'refr-settings' ) {
 
 		// first purge the API check
-		delete_option( 'yourls_api_test' );
+		delete_option( 'refr_api_test' );
 
 		// delete if empty, else go through some checks
 		if ( empty( $data ) ) {
 			// delete the key
-			delete_option( 'yourls_options' );
+			delete_option( 'refr_options' );
 			// get the link
-			$redirect   = self::get_settings_page_link( $key, 'yourls-deleted=1' );
+			$redirect   = self::get_settings_page_link( $key, 'refr-deleted=1' );
 			// and redirect
 			wp_redirect( $redirect, 302 );
 			// and exit
@@ -179,14 +179,14 @@ class YOURLSCreator_Settings
 		}
 
 		// we got something. check and store
-		if ( get_option( 'yourls_options' ) !== false ) {
-			update_option( 'yourls_options', $data );
+		if ( get_option( 'refr_options' ) !== false ) {
+			update_option( 'refr_options', $data );
 		} else {
-			add_option( 'yourls_options', $data, null, 'no' );
+			add_option( 'refr_options', $data, null, 'no' );
 		}
 
 		// get the link
-		$redirect   = self::get_settings_page_link( $key, 'yourls-saved=1' );
+		$redirect   = self::get_settings_page_link( $key, 'refr-saved=1' );
 
 		// and redirect
 		wp_redirect( $redirect, 302 );
@@ -204,12 +204,12 @@ class YOURLSCreator_Settings
 	public function settings_messages() {
 
 		// check for string first
-		if ( empty( $_GET['yourls-action'] ) ) {
+		if ( empty( $_GET['refr-action'] ) ) {
 			return;
 		}
 
 		// our saved
-		if ( ! empty( $_GET['yourls-saved'] ) ) {
+		if ( ! empty( $_GET['refr-saved'] ) ) {
 			// the message
 			echo '<div class="updated settings-error" id="setting-error-settings_updated">';
 			echo '<p><strong>' . __( 'Your settings have been saved.', 'wprefr' ) . '</strong></p>';
@@ -217,7 +217,7 @@ class YOURLSCreator_Settings
 		}
 
 		// our deleted
-		if ( ! empty( $_GET['yourls-deleted'] ) ) {
+		if ( ! empty( $_GET['refr-deleted'] ) ) {
 			// the message
 			echo '<div class="error settings-error" id="setting-error-settings_updated">';
 			echo '<p><strong>' . __( 'Your settings have been deleted.', 'wprefr' ) . '</strong></p>';
@@ -232,10 +232,10 @@ class YOURLSCreator_Settings
 	 * @param  string $string [description]
 	 * @return [type]         [description]
 	 */
-	public static function get_settings_page_link( $page = 'yourls-settings', $string = '' ) {
+	public static function get_settings_page_link( $page = 'refr-settings', $string = '' ) {
 
 		// get the base
-		$base   = menu_page_url( $page, 0 ) . '&yourls-action=1';
+		$base   = menu_page_url( $page, 0 ) . '&refr-action=1';
 
 		// build the link
 		$link   = ! empty( $string ) ? $base . '&' . $string : $base;
@@ -249,10 +249,10 @@ class YOURLSCreator_Settings
 	 *
 	 * @return void
 	 */
-	public static function yourls_settings_page() {
+	public static function refr_settings_page() {
 
 		// bail if current user cannot manage options
-		if(	! current_user_can( apply_filters( 'yourls_settings_cap', 'manage_options' ) ) ) {
+		if(	! current_user_can( apply_filters( 'refr_settings_cap', 'manage_options' ) ) ) {
 			return;
 		}
 		?>
@@ -266,15 +266,15 @@ class YOURLSCreator_Settings
 			self::settings_open();
 			?>
 
-		   	<div class="yourls-form-text">
-		   	<p><?php _e( 'Below are the basic settings for the YOURLS creator. A reminder, your YOURLS install cannot be public.', 'wprefr' ); ?></p>
+		   	<div class="refr-form-text">
+		   	<p><?php _e( 'Below are the basic settings for the REFR creator. A reminder, your REFR install cannot be public.', 'wprefr' ); ?></p>
 			</div>
 
-			<div class="yourls-form-options">
+			<div class="refr-form-options">
 				<form method="post">
 				<?php
 				// fetch our data for the settings
-				$data   = YOURLSCreator_Helper::get_yourls_option();
+				$data   = REFRCreator_Helper::get_refr_option();
 
 				// filter and check each one
 				$url    = ! empty( $data['url'] ) ? $data['url'] : '';
@@ -286,61 +286,61 @@ class YOURLSCreator_Settings
 				$types  = ! empty( $data['typ'] ) ? (array) $data['typ'] : array();
 
 				// load the settings fields
-				wp_nonce_field( 'yourls_settings_save_nonce', 'yourls_settings_save', false, true );
+				wp_nonce_field( 'refr_settings_save_nonce', 'refr_settings_save', false, true );
 				?>
 
-				<table class="form-table yourls-table">
+				<table class="form-table refr-table">
 				<tbody>
 					<tr>
-						<th><?php _e( 'YOURLS Custom URL', 'wprefr' ); ?></th>
+						<th><?php _e( 'REFR Custom URL', 'wprefr' ); ?></th>
 						<td>
-							<input type="url" class="regular-text code" value="<?php echo esc_url( $url ); ?>" id="yourls-url" name="yourls-options[url]">
-							<p class="description"><?php _e( 'Enter the domain URL for your YOURLS API', 'wprefr' ); ?></p>
+							<input type="url" class="regular-text code" value="<?php echo esc_url( $url ); ?>" id="refr-url" name="refr-options[url]">
+							<p class="description"><?php _e( 'Enter the domain URL for your REFR API', 'wprefr' ); ?></p>
 						</td>
 					</tr>
 
 					<tr>
-						<th><?php _e( 'YOURLS API Signature Key', 'wprefr' ); ?></th>
+						<th><?php _e( 'REFR API Signature Key', 'wprefr' ); ?></th>
 						<td class="apikey-field-wrapper">
-							<input type="text" class="regular-text code" value="<?php echo esc_attr( $api ); ?>" id="yourls-api" name="yourls-options[api]" autocomplete="off">
+							<input type="text" class="regular-text code" value="<?php echo esc_attr( $api ); ?>" id="refr-api" name="refr-options[api]" autocomplete="off">
 							<span class="dashicons dashicons-visibility password-toggle"></span>
-							<p class="description"><?php _e('Found in the tools section on your YOURLS admin page.', 'wprefr') ?></p>
+							<p class="description"><?php _e('Found in the tools section on your REFR admin page.', 'wprefr') ?></p>
 						</td>
 					</tr>
 
 					<tr>
 						<th><?php _e( 'Auto generate links', 'wprefr' ) ?></th>
 						<td class="setting-item">
-							<input type="checkbox" name="yourls-options[sav]" id="yourls-sav" value="true" <?php checked( $save, true ); ?> />
-							<label for="yourls-sav"><?php _e( 'Create a YOURLS link when a post is saved.', 'wprefr' ); ?></label>
+							<input type="checkbox" name="refr-options[sav]" id="refr-sav" value="true" <?php checked( $save, true ); ?> />
+							<label for="refr-sav"><?php _e( 'Create a REFR link when a post is saved.', 'wprefr' ); ?></label>
 						</td>
 					</tr>
 
 					<tr>
 						<th><?php _e( 'Scheduled Content', 'wprefr' ) ?></th>
 						<td class="setting-item">
-							<input type="checkbox" name="yourls-options[sch]" id="yourls-sch" value="true" <?php checked( $schd, true ); ?> />
-							<label for="yourls-sch"><?php _e( 'Create a YOURLS link when a scheduled post publishes.', 'wprefr' ); ?></label>
+							<input type="checkbox" name="refr-options[sch]" id="refr-sch" value="true" <?php checked( $schd, true ); ?> />
+							<label for="refr-sch"><?php _e( 'Create a REFR link when a scheduled post publishes.', 'wprefr' ); ?></label>
 						</td>
 					</tr>
 
 					<tr>
-						<th><?php _e( 'Use YOURLS for shortlink', 'wprefr' ) ?></th>
+						<th><?php _e( 'Use REFR for shortlink', 'wprefr' ) ?></th>
 						<td class="setting-item">
-							<input type="checkbox" name="yourls-options[sht]" id="yourls-sht" value="true" <?php checked( $short, true ); ?> />
-							<label for="yourls-sht"><?php _e( 'Use the YOURLS link wherever wp_shortlink is fired', 'wprefr' ); ?></label>
+							<input type="checkbox" name="refr-options[sht]" id="refr-sht" value="true" <?php checked( $short, true ); ?> />
+							<label for="refr-sht"><?php _e( 'Use the REFR link wherever wp_shortlink is fired', 'wprefr' ); ?></label>
 						</td>
 					</tr>
 
 					<tr class="setting-item-types">
 						<th><?php _e( 'Include Custom Post Types', 'wprefr' ) ?></th>
 						<td class="setting-item">
-							<input type="checkbox" name="yourls-options[cpt]" id="yourls-cpt" value="true" <?php checked( $cpts, true ); ?> />
-							<label for="yourls-cpt"><?php _e( 'Display the YOURLS creator on public custom post types', 'wprefr' ); ?></label>
+							<input type="checkbox" name="refr-options[cpt]" id="refr-cpt" value="true" <?php checked( $cpts, true ); ?> />
+							<label for="refr-cpt"><?php _e( 'Display the REFR creator on public custom post types', 'wprefr' ); ?></label>
 						</td>
 					</tr>
 
-					<tr class="secondary yourls-types" style="display:none;">
+					<tr class="secondary refr-types" style="display:none;">
 						<th><?php _e( 'Select the types to include', 'wprefr' ); ?></th>
 						<td><?php echo self::post_types( $types ); ?></td>
 					</tr>
@@ -396,8 +396,8 @@ class YOURLSCreator_Settings
 
 			// output checkboxes
 			$boxes	.= '<span>';
-				$boxes	.= '<input type="checkbox" name="yourls-options[typ][' . esc_attr( $name ) . ']" id="yourls-options-typ-' . esc_attr( $name ) . '" value="' . esc_attr( $name ) . '" ' . $check . ' />';
-				$boxes	.= '<label for="yourls-options-typ-' . esc_attr( $name ) . '">' . esc_attr( $label ) . '</label>';
+				$boxes	.= '<input type="checkbox" name="refr-options[typ][' . esc_attr( $name ) . ']" id="refr-options-typ-' . esc_attr( $name ) . '" value="' . esc_attr( $name ) . '" ' . $check . ' />';
+				$boxes	.= '<label for="refr-options-typ-' . esc_attr( $name ) . '">' . esc_attr( $label ) . '</label>';
 			$boxes	.= '</span>';
 		}
 
@@ -440,17 +440,17 @@ class YOURLSCreator_Settings
 	 */
 	public static function sidebox_about() { ?>
 
-		<div id="yourls-admin-about" class="postbox yourls-sidebox">
+		<div id="refr-admin-about" class="postbox refr-sidebox">
 			<h3 class="hndle" id="about-sidebar"><?php _e( 'About the Plugin', 'wprefr' ); ?></h3>
 			<div class="inside">
 
 				<p><strong><?php _e( 'Questions?', 'wprefr' ); ?></strong><br />
 
-				<?php echo sprintf( __( 'Talk to <a href="%s" class="external">@norcross</a> on twitter or visit the <a href="%s" class="external">plugin support forum</a> for bugs or feature requests.', 'wprefr' ), esc_url( 'https://twitter.com/norcross' ), esc_url( 'https://wordpress.org/support/plugin/yourls-link-creator/' ) ); ?></p>
+				<?php echo sprintf( __( 'Talk to <a href="%s" class="external">@norcross</a> on twitter or visit the <a href="%s" class="external">plugin support forum</a> for bugs or feature requests.', 'wprefr' ), esc_url( 'https://twitter.com/norcross' ), esc_url( 'https://wordpress.org/support/plugin/refr-link-creator/' ) ); ?></p>
 
 				<p><strong><?php _e( 'Enjoy the plugin?', 'wprefr' ); ?></strong><br />
 
-				<?php echo sprintf( __( '<a href="%s" class="admin-twitter-link">Tweet about it</a> and consider donating.', 'wprefr' ), 'http://twitter.com/?status=I\'m using @norcross\'s REFR Shortlinks plugin - check it out! http://l.norc.co/yourls/' ); ?>
+				<?php echo sprintf( __( '<a href="%s" class="admin-twitter-link">Tweet about it</a> and consider donating.', 'wprefr' ), 'http://twitter.com/?status=I\'m using @norcross\'s REFR Shortlinks plugin - check it out! http://l.norc.co/refr/' ); ?>
 
 				<p><strong><?php _e( 'Donate:', 'wprefr' ) ?></strong><br />
 
@@ -468,12 +468,12 @@ class YOURLSCreator_Settings
 	public static function sidebox_status() {
 
 		// get my API status data
-		if ( false === $data = YOURLSCreator_Helper::get_api_status_data() ) {
+		if ( false === $data = REFRCreator_Helper::get_api_status_data() ) {
 			return;
 		}
 		?>
 
-		<div id="yourls-admin-status" class="postbox yourls-sidebox">
+		<div id="refr-admin-status" class="postbox refr-sidebox">
 			<h3 class="hndle" id="status-sidebar"><?php echo $data['icon']; ?><?php _e( 'API Status Check', 'wprefr' ); ?></h3>
 			<div class="inside">
 				<form>
@@ -481,9 +481,9 @@ class YOURLSCreator_Settings
 				<p class="api-status-text"><?php echo esc_attr( $data['text'] ); ?></p>
 
 				<p class="api-status-actions">
-					<input type="button" class="yourls-click-status button-primary" value="<?php _e( 'Check Status', 'wprefr' ); ?>" >
-					<span class="spinner yourls-spinner yourls-status-spinner"></span>
-					<?php wp_nonce_field( 'yourls_status_nonce', 'yourls_status', false, true ); ?>
+					<input type="button" class="refr-click-status button-primary" value="<?php _e( 'Check Status', 'wprefr' ); ?>" >
+					<span class="spinner refr-spinner refr-status-spinner"></span>
+					<?php wp_nonce_field( 'refr_status_nonce', 'refr_status', false, true ); ?>
 
 				</p>
 
@@ -498,28 +498,28 @@ class YOURLSCreator_Settings
 	 */
 	public static function sidebox_data() { ?>
 
-		<div id="yourls-data-refresh" class="postbox yourls-sidebox">
+		<div id="refr-data-refresh" class="postbox refr-sidebox">
 			<h3 class="hndle" id="data-sidebar"><?php _e( 'Data Options', 'wprefr' ); ?></h3>
 			<div class="inside">
 				<form>
-					<p><?php _e( 'Click the button below to refresh the click count data for all posts with a YOURLS link.', 'wprefr' ); ?></p>
-					<input type="button" class="yourls-click-updates button-primary" value="<?php _e( 'Refresh Click Counts', 'wprefr' ); ?>" >
-					<span class="spinner yourls-spinner yourls-refresh-spinner"></span>
-					<?php wp_nonce_field( 'yourls_refresh_nonce', 'yourls_refresh', false, true ); ?>
+					<p><?php _e( 'Click the button below to refresh the click count data for all posts with a REFR link.', 'wprefr' ); ?></p>
+					<input type="button" class="refr-click-updates button-primary" value="<?php _e( 'Refresh Click Counts', 'wprefr' ); ?>" >
+					<span class="spinner refr-spinner refr-refresh-spinner"></span>
+					<?php wp_nonce_field( 'refr_refresh_nonce', 'refr_refresh', false, true ); ?>
 
 					<hr />
 
-					<p><?php _e( 'Click the button below to attempt an import of existing YOURLS links.', 'wprefr' ); ?></p>
-					<input type="button" class="yourls-click-import button-primary" value="<?php _e( 'Import Existing URLs', 'wprefr' ); ?>" >
-					<span class="spinner yourls-spinner yourls-import-spinner"></span>
-					<?php wp_nonce_field( 'yourls_import_nonce', 'yourls_import', false, true ); ?>
+					<p><?php _e( 'Click the button below to attempt an import of existing REFR links.', 'wprefr' ); ?></p>
+					<input type="button" class="refr-click-import button-primary" value="<?php _e( 'Import Existing URLs', 'wprefr' ); ?>" >
+					<span class="spinner refr-spinner refr-import-spinner"></span>
+					<?php wp_nonce_field( 'refr_import_nonce', 'refr_import', false, true ); ?>
 
 					<hr />
 
 					<p><?php _e( 'Using Ozh\'s plugin? Click here to convert the existing meta keys', 'wprefr' ); ?></p>
-					<input type="button" class="yourls-convert button-primary" value="<?php _e( 'Convert Meta Keys', 'wprefr' ); ?>" >
-					<span class="spinner yourls-spinner yourls-convert-spinner"></span>
-					<?php wp_nonce_field( 'yourls_convert_nonce', 'yourls_convert', false, true ); ?>
+					<input type="button" class="refr-convert button-primary" value="<?php _e( 'Convert Meta Keys', 'wprefr' ); ?>" >
+					<span class="spinner refr-spinner refr-convert-spinner"></span>
+					<?php wp_nonce_field( 'refr_convert_nonce', 'refr_convert', false, true ); ?>
 
 				</form>
 			</div>
@@ -532,14 +532,14 @@ class YOURLSCreator_Settings
 	 */
 	public static function sidebox_links() { ?>
 
-		<div id="yourls-admin-links" class="postbox yourls-sidebox">
+		<div id="refr-admin-links" class="postbox refr-sidebox">
 			<h3 class="hndle" id="links-sidebar"><?php _e( 'Additional Links', 'wprefr' ); ?></h3>
 			<div class="inside">
 				<ul>
-					<li><a href="http://yourls.org/" target="_blank"><?php _e( 'YOURLS homepage', 'wprefr' ); ?></a></li>
-					<li><a href="http://wordpress.org/extend/plugins/yourls-link-creator/" target="_blank"><?php _e( 'Plugin on WP.org', 'wprefr' ); ?></a></li>
-					<li><a href="https://github.com/norcross/yourls-link-creator/" target="_blank"><?php _e( 'Plugin on GitHub', 'wprefr' ); ?></a></li>
-					<li><a href="http://wordpress.org/support/plugin/yourls-link-creator/" target="_blank"><?php _e( 'Support Forum', 'wprefr' ); ?></a><li>
+					<li><a href="http://refr.org/" target="_blank"><?php _e( 'REFR homepage', 'wprefr' ); ?></a></li>
+					<li><a href="http://wordpress.org/extend/plugins/refr-link-creator/" target="_blank"><?php _e( 'Plugin on WP.org', 'wprefr' ); ?></a></li>
+					<li><a href="https://github.com/webmarka/refr-shortlinks/" target="_blank"><?php _e( 'Plugin on GitHub', 'wprefr' ); ?></a></li>
+					<li><a href="http://wordpress.org/support/plugin/refr-link-creator/" target="_blank"><?php _e( 'Support Forum', 'wprefr' ); ?></a><li>
 				</ul>
 			</div>
 		</div>
@@ -594,5 +594,5 @@ class YOURLSCreator_Settings
 }
 
 // Instantiate our class
-new YOURLSCreator_Settings();
+new REFRCreator_Settings();
 

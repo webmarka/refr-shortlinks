@@ -28,13 +28,13 @@
  * Template tag: return/echo short URL with no formatting
  * just a straight copy of the original function from Ozh
  */
-if ( ! function_exists( 'wp_ozh_yourls_raw_url' ) ) {
+if ( ! function_exists( 'wp_ozh_refr_raw_url' ) ) {
 
-	function wp_ozh_yourls_raw_url( $echo = false ) {
+	function wp_ozh_refr_raw_url( $echo = false ) {
 
 		global $id;
 
-		$short = apply_filters( 'ozh_yourls_shorturl', wp_ozh_yourls_geturl( $id ) );
+		$short = apply_filters( 'ozh_refr_shorturl', wp_ozh_refr_geturl( $id ) );
 
 		if ( $short ) {
 
@@ -51,21 +51,21 @@ if ( ! function_exists( 'wp_ozh_yourls_raw_url' ) ) {
 /**
  * Template tag: echo short URL for current post
  */
-if ( ! function_exists( 'wp_ozh_yourls_url' ) ) {
+if ( ! function_exists( 'wp_ozh_refr_url' ) ) {
 
-	function wp_ozh_yourls_url() {
+	function wp_ozh_refr_url() {
 
 		global $id;
 
-		$short = esc_url( apply_filters( 'ozh_yourls_shorturl', wp_ozh_yourls_geturl( $id ) ) );
+		$short = esc_url( apply_filters( 'ozh_refr_shorturl', wp_ozh_refr_geturl( $id ) ) );
 
 		if ($short) {
 
-			$rel    = esc_attr( apply_filters( 'ozh_yourls_shorturl_rel', 'nofollow alternate shorturl shortlink' ) );
+			$rel    = esc_attr( apply_filters( 'ozh_refr_shorturl_rel', 'nofollow alternate shorturl shortlink' ) );
 
-			$title  = esc_attr( apply_filters( 'ozh_yourls_shorturl_title', 'Short URL' ) );
+			$title  = esc_attr( apply_filters( 'ozh_refr_shorturl_title', 'Short URL' ) );
 
-			$anchor = esc_html( apply_filters( 'ozh_yourls_shorturl_anchor', $short ) );
+			$anchor = esc_html( apply_filters( 'ozh_refr_shorturl_anchor', $short ) );
 
 			echo "<a href=\"$short\" rel=\"$rel\" title=\"$title\">$anchor</a>";
 
@@ -79,25 +79,25 @@ if ( ! function_exists( 'wp_ozh_yourls_url' ) ) {
  * Get or create the short URL for a post.
  * Input integer (post id), output string(url)
  */
-if ( ! function_exists( 'wp_ozh_yourls_geturl' ) ) {
+if ( ! function_exists( 'wp_ozh_refr_geturl' ) ) {
 
-	function wp_ozh_yourls_geturl( $id ) {
+	function wp_ozh_refr_geturl( $id ) {
 
 		// Hardcode this const to always poll the shortening service. Debug tests only, obviously.
-		if( defined('YOURLS_ALWAYS_FRESH') && YOURLS_ALWAYS_FRESH ) {
+		if( defined('REFR_ALWAYS_FRESH') && REFR_ALWAYS_FRESH ) {
 			$short = null;
 		} else {
-			$short = get_post_meta( $id, 'yourls_shorturl', true );
+			$short = get_post_meta( $id, 'refr_shorturl', true );
 		}
 
 		// bypassing the fetch action from Ozh's plugin to avoid errors
 		/*
 		// short URL never was not created before? let's get it now!
-		if ( ! $short && ! is_preview() && ! get_post_custom_values( 'yourls_fetching', $id) ) {
+		if ( ! $short && ! is_preview() && ! get_post_custom_values( 'refr_fetching', $id) ) {
 
 			// Allow plugin to define custom keyword
-			$keyword = apply_filters( 'ozh_yourls_custom_keyword', '', $id );
-			$short = wp_ozh_yourls_get_new_short_url( get_permalink( $id ), $id, $keyword );
+			$keyword = apply_filters( 'ozh_refr_custom_keyword', '', $id );
+			$short = wp_ozh_refr_get_new_short_url( get_permalink( $id ), $id, $keyword );
 		}
 		*/
 

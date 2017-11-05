@@ -25,12 +25,12 @@ msgid "There was an error with your request."
 msgstr "There was an error with your request."
 
 #: lib/admin.php:109
-msgid "YOURLS Shortlink"
-msgstr "YOURLS Shortlink"
+msgid "REFR Shortlink"
+msgstr "REFR Shortlink"
 
 #: lib/admin.php:252
-msgid "YOURLS Clicks"
-msgstr "YOURLS Clicks"
+msgid "REFR Clicks"
+msgstr "REFR Clicks"
 
 #: lib/ajax.php:67 lib/ajax.php:195 lib/ajax.php:283 lib/ajax.php:361
 #: lib/ajax.php:457 lib/ajax.php:535 lib/ajax.php:601 lib/ajax.php:674
@@ -63,8 +63,8 @@ msgid "There was an unknown API error."
 msgstr "There was an unknown API error."
 
 #: lib/ajax.php:160 lib/ajax.php:423
-msgid "You have created a new YOURLS link."
-msgstr "You have created a new YOURLS link."
+msgid "You have created a new REFR link."
+msgstr "You have created a new REFR link."
 
 #: lib/ajax.php:170 lib/ajax.php:432 lib/ajax.php:510 lib/ajax.php:769
 msgid "There was an unknown error."
@@ -75,16 +75,16 @@ msgid "There is no URL to delete."
 msgstr "There is no URL to delete."
 
 #: lib/ajax.php:236
-msgid "You have removed your YOURLS link."
-msgstr "You have removed your YOURLS link."
+msgid "You have removed your REFR link."
+msgstr "You have removed your REFR link."
 
 #: lib/ajax.php:305
-msgid "Your YOURLS click count has been updated"
-msgstr "Your YOURLS click count has been updated"
+msgid "Your REFR click count has been updated"
+msgstr "Your REFR click count has been updated"
 
 #: lib/ajax.php:491 lib/helper.php:664
-msgid "The status of the YOURLS API could not be determined."
-msgstr "The status of the YOURLS API could not be determined."
+msgid "The status of the REFR API could not be determined."
+msgstr "The status of the REFR API could not be determined."
 
 #: lib/ajax.php:553
 msgid "There are no items with stored URLs."
@@ -115,8 +115,8 @@ msgid "The data could not be imported."
 msgstr "The data could not be imported."
 
 #: lib/ajax.php:761
-msgid "All available YOURLS data has been imported."
-msgstr "All available YOURLS data has been imported."
+msgid "All available REFR data has been imported."
+msgstr "All available REFR data has been imported."
 
 #: lib/front.php:92
 msgid "Shortlink:"
@@ -168,36 +168,36 @@ msgid "optional keyword"
 msgstr "optional keyword"
 
 #: lib/helper.php:556
-msgid "Create YOURLS link"
-msgstr "Create YOURLS link"
+msgid "Create REFR link"
+msgstr "Create REFR link"
 
 #: lib/helper.php:588
 msgid "Delete Link"
 msgstr "Delete Link"
 
 #: lib/helper.php:611
-msgid "Create YOURLS"
-msgstr "Create YOURLS"
+msgid "Create REFR"
+msgstr "Create REFR"
 
 #: lib/helper.php:626
-msgid "Update YOURLS"
-msgstr "Update YOURLS"
+msgid "Update REFR"
+msgstr "Update REFR"
 
 #: lib/helper.php:673
-msgid "The YOURLS API is currently accessible."
-msgstr "The YOURLS API is currently accessible."
+msgid "The REFR API is currently accessible."
+msgstr "The REFR API is currently accessible."
 
 #: lib/helper.php:683
-msgid "The YOURLS API is currently NOT accessible."
-msgstr "The YOURLS API is currently NOT accessible."
+msgid "The REFR API is currently NOT accessible."
+msgstr "The REFR API is currently NOT accessible."
 
 #: lib/settings.php:65
 msgid "Settings"
 msgstr "Settings"
 
 #: lib/settings.php:80
-msgid "YOURLS Settings"
-msgstr "YOURLS Settings"
+msgid "REFR Settings"
+msgstr "REFR Settings"
 
 #: lib/settings.php:215
 msgid "Your settings have been saved."
@@ -213,59 +213,59 @@ msgstr "REFR Shortlinks Settings"
 
 #: lib/settings.php:269
 msgid ""
-"Below are the basic settings for the YOURLS creator. A reminder, your YOURLS "
+"Below are the basic settings for the REFR creator. A reminder, your REFR "
 "install cannot be public."
 msgstr ""
-"Below are the basic settings for the YOURLS creator. A reminder, your YOURLS "
+"Below are the basic settings for the REFR creator. A reminder, your REFR "
 "install cannot be public."
 
 #: lib/settings.php:294
-msgid "YOURLS Custom URL"
-msgstr "YOURLS Custom URL"
+msgid "REFR Custom URL"
+msgstr "REFR Custom URL"
 
 #: lib/settings.php:297
-msgid "Enter your custom YOURLS URL"
-msgstr "Enter your custom YOURLS URL"
+msgid "Enter your custom REFR URL"
+msgstr "Enter your custom REFR URL"
 
 #: lib/settings.php:302
-msgid "YOURLS API Signature Key"
-msgstr "YOURLS API Signature Key"
+msgid "REFR API Signature Key"
+msgstr "REFR API Signature Key"
 
 #: lib/settings.php:306
-msgid "Found in the tools section on your YOURLS admin page."
-msgstr "Found in the tools section on your YOURLS admin page."
+msgid "Found in the tools section on your REFR admin page."
+msgstr "Found in the tools section on your REFR admin page."
 
 #: lib/settings.php:311
 msgid "Auto generate links"
 msgstr "Auto generate links"
 
 #: lib/settings.php:314
-msgid "Create a YOURLS link when a post is saved."
-msgstr "Create a YOURLS link when a post is saved."
+msgid "Create a REFR link when a post is saved."
+msgstr "Create a REFR link when a post is saved."
 
 #: lib/settings.php:319
 msgid "Scheduled Content"
 msgstr "Scheduled Content"
 
 #: lib/settings.php:322
-msgid "Create a YOURLS link when a scheduled post publishes."
-msgstr "Create a YOURLS link when a scheduled post publishes. "
+msgid "Create a REFR link when a scheduled post publishes."
+msgstr "Create a REFR link when a scheduled post publishes. "
 
 #: lib/settings.php:327
-msgid "Use YOURLS for shortlink"
-msgstr "Use YOURLS for shortlink"
+msgid "Use REFR for shortlink"
+msgstr "Use REFR for shortlink"
 
 #: lib/settings.php:330
-msgid "Use the YOURLS link wherever wp_shortlink is fired"
-msgstr "Use the YOURLS link wherever wp_shortlink is fired"
+msgid "Use the REFR link wherever wp_shortlink is fired"
+msgstr "Use the REFR link wherever wp_shortlink is fired"
 
 #: lib/settings.php:335
 msgid "Include Custom Post Types"
 msgstr "Include Custom Post Types"
 
 #: lib/settings.php:338
-msgid "Display the YOURLS creator on public custom post types"
-msgstr "Display the YOURLS creator on public custom post types"
+msgid "Display the REFR creator on public custom post types"
+msgstr "Display the REFR creator on public custom post types"
 
 #: lib/settings.php:343
 msgid "Select the types to include"
@@ -336,18 +336,18 @@ msgstr "Data Options"
 #: lib/settings.php:504
 msgid ""
 "Click the button below to refresh the click count data for all posts with a "
-"YOURLS link."
+"REFR link."
 msgstr ""
 "Click the button below to refresh the click count data for all posts with a "
-"YOURLS link."
+"REFR link."
 
 #: lib/settings.php:505
 msgid "Refresh Click Counts"
 msgstr "Refresh Click Counts"
 
 #: lib/settings.php:511
-msgid "Click the button below to attempt an import of existing YOURLS links."
-msgstr "Click the button below to attempt an import of existing YOURLS links."
+msgid "Click the button below to attempt an import of existing REFR links."
+msgstr "Click the button below to attempt an import of existing REFR links."
 
 #: lib/settings.php:512
 msgid "Import Existing URLs"
@@ -366,8 +366,8 @@ msgid "Additional Links"
 msgstr "Additional Links"
 
 #: lib/settings.php:538
-msgid "YOURLS homepage"
-msgstr "YOURLS homepage"
+msgid "REFR homepage"
+msgstr "REFR homepage"
 
 #: lib/settings.php:539
 msgid "Plugin on WP.org"

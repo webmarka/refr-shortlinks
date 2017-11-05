@@ -22,32 +22,32 @@
 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-if ( ! class_exists( 'YOURLSCreator_Ajax' ) ) {
+if ( ! class_exists( 'REFRCreator_Ajax' ) ) {
 
 // Start up the engine
-class YOURLSCreator_Ajax
+class REFRCreator_Ajax
 {
 
 	/**
 	 * This is our constructor
 	 *
-	 * @return YOURLSCreator_Ajax
+	 * @return REFRCreator_Ajax
 	 */
 	public function __construct() {
-		add_action( 'wp_ajax_create_yourls',        array( $this, 'create_yourls'       )           );
-		add_action( 'wp_ajax_delete_yourls',        array( $this, 'delete_yourls'       )           );
-		add_action( 'wp_ajax_stats_yourls',         array( $this, 'stats_yourls'        )           );
-		add_action( 'wp_ajax_inline_yourls',        array( $this, 'inline_yourls'       )           );
-		add_action( 'wp_ajax_status_yourls',        array( $this, 'status_yourls'       )           );
-		add_action( 'wp_ajax_refresh_yourls',       array( $this, 'refresh_yourls'      )           );
-		add_action( 'wp_ajax_convert_yourls',       array( $this, 'convert_yourls'      )           );
-		add_action( 'wp_ajax_import_yourls',        array( $this, 'import_yourls'       )           );
+		add_action( 'wp_ajax_create_refr',        array( $this, 'create_refr'       )           );
+		add_action( 'wp_ajax_delete_refr',        array( $this, 'delete_refr'       )           );
+		add_action( 'wp_ajax_stats_refr',         array( $this, 'stats_refr'        )           );
+		add_action( 'wp_ajax_inline_refr',        array( $this, 'inline_refr'       )           );
+		add_action( 'wp_ajax_status_refr',        array( $this, 'status_refr'       )           );
+		add_action( 'wp_ajax_refresh_refr',       array( $this, 'refresh_refr'      )           );
+		add_action( 'wp_ajax_convert_refr',       array( $this, 'convert_refr'      )           );
+		add_action( 'wp_ajax_import_refr',        array( $this, 'import_refr'       )           );
 	}
 
 	/**
 	 * Create shortlink function
 	 */
-	public function create_yourls() {
+	public function create_refr() {
 
 		// only run on admin
 		if ( ! is_admin() ) {
@@ -58,7 +58,7 @@ class YOURLSCreator_Ajax
 		$ret = array();
 
 		// verify our nonce
-		$check	= check_ajax_referer( 'yourls_editor_create', 'nonce', false );
+		$check	= check_ajax_referer( 'refr_editor_create', 'nonce', false );
 
 		// check to see if our nonce failed
 		if( ! $check ) {
@@ -70,7 +70,7 @@ class YOURLSCreator_Ajax
 		}
 
 		// bail if the API key or URL have not been entered
-		if(	false === $api = YOURLSCreator_Helper::get_yourls_api_data() ) {
+		if(	false === $api = REFRCreator_Helper::get_refr_api_data() ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_API_DATA';
 			$ret['message'] = __( 'No API data has been entered.', 'wprefr' );
@@ -91,7 +91,7 @@ class YOURLSCreator_Ajax
 		$post_id    = absint( $_POST['post_id'] );
 
 		// bail if we aren't working with a published or scheduled post
-		if ( ! in_array( get_post_status( $post_id ), YOURLSCreator_Helper::get_yourls_status() ) ) {
+		if ( ! in_array( get_post_status( $post_id ), REFRCreator_Helper::get_refr_status() ) ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'INVALID_STATUS';
 			$ret['message'] = __( 'This is not a valid post status.', 'wprefr' );
@@ -100,7 +100,7 @@ class YOURLSCreator_Ajax
 		}
 
 		// do a quick check for a URL
-		if ( false !== $link = YOURLSCreator_Helper::get_yourls_meta( $post_id, '_yourls_url' ) ) {
+		if ( false !== $link = REFRCreator_Helper::get_refr_meta( $post_id, '_refr_url' ) ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'URL_EXISTS';
 			$ret['message'] = __( 'A URL already exists.', 'wprefr' );
@@ -109,7 +109,7 @@ class YOURLSCreator_Ajax
 		}
 
 		// do a quick check for a permalink
-		if ( false === $url = YOURLSCreator_Helper::prepare_api_link( $post_id ) ) {
+		if ( false === $url = REFRCreator_Helper::prepare_api_link( $post_id ) ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_PERMALINK';
 			$ret['message'] = __( 'No permalink could be retrieved.', 'wprefr' );
@@ -118,14 +118,14 @@ class YOURLSCreator_Ajax
 		}
 
 		// check for keyword and get the title
-		$keyword = ! empty( $_POST['keyword'] ) ? YOURLSCreator_Helper::prepare_api_keyword( $_POST['keyword'] ) : '';
+		$keyword = ! empty( $_POST['keyword'] ) ? REFRCreator_Helper::prepare_api_keyword( $_POST['keyword'] ) : '';
 		$title   = get_the_title( $post_id );
 
 		// set my args for the API call
 		$args   = array( 'url' => esc_url( $url ), 'title' => sanitize_text_field( $title ), 'keyword' => $keyword );
 
 		// make the API call
-		$build  = YOURLSCreator_Helper::run_yourls_api_call( 'shorturl', $args );
+		$build  = REFRCreator_Helper::run_refr_api_call( 'shorturl', $args );
 
 		// bail if empty data
 		if ( empty( $build ) ) {
@@ -152,14 +152,14 @@ class YOURLSCreator_Ajax
 			$shorturl   = esc_url( $build['data']['shorturl'] );
 
 			// update the post meta
-			update_post_meta( $post_id, '_yourls_url', $shorturl );
-			update_post_meta( $post_id, '_yourls_clicks', '0' );
+			update_post_meta( $post_id, '_refr_url', $shorturl );
+			update_post_meta( $post_id, '_refr_clicks', '0' );
 
 			// and do the API return
 			$ret['success'] = true;
-			$ret['message'] = __( 'You have created a new YOURLS link.', 'wprefr' );
+			$ret['message'] = __( 'You have created a new REFR link.', 'wprefr' );
 			$ret['linkurl'] = $shorturl;
-			$ret['linkbox'] = YOURLSCreator_Helper::get_yourls_linkbox( $shorturl, $post_id );
+			$ret['linkbox'] = REFRCreator_Helper::get_refr_linkbox( $shorturl, $post_id );
 			echo json_encode( $ret );
 			die();
 		}
@@ -175,7 +175,7 @@ class YOURLSCreator_Ajax
 	/**
 	 * Delete shortlink function
 	 */
-	public function delete_yourls() {
+	public function delete_refr() {
 
 		// only run on admin
 		if ( ! is_admin() ) {
@@ -186,7 +186,7 @@ class YOURLSCreator_Ajax
 		$ret = array();
 
 		// verify our nonce
-		$check	= check_ajax_referer( 'yourls_editor_delete', 'nonce', false );
+		$check	= check_ajax_referer( 'refr_editor_delete', 'nonce', false );
 
 		// check to see if our nonce failed
 		if( ! $check ) {
@@ -198,7 +198,7 @@ class YOURLSCreator_Ajax
 		}
 
 		// bail if the API key or URL have not been entered
-		if(	false === $api = YOURLSCreator_Helper::get_yourls_api_data() ) {
+		if(	false === $api = REFRCreator_Helper::get_refr_api_data() ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_API_DATA';
 			$ret['message'] = __( 'No API data has been entered.', 'wprefr' );
@@ -219,7 +219,7 @@ class YOURLSCreator_Ajax
 		$post_id    = absint( $_POST['post_id'] );
 
 		// do a quick check for a URL
-		if ( false === $link = YOURLSCreator_Helper::get_yourls_meta( $post_id, '_yourls_url' ) ) {
+		if ( false === $link = REFRCreator_Helper::get_refr_meta( $post_id, '_refr_url' ) ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_URL_EXISTS';
 			$ret['message'] = __( 'There is no URL to delete.', 'wprefr' );
@@ -228,13 +228,13 @@ class YOURLSCreator_Ajax
 		}
 
 		// passed it all. go forward
-		delete_post_meta( $post_id, '_yourls_url' );
-		delete_post_meta( $post_id, '_yourls_clicks' );
+		delete_post_meta( $post_id, '_refr_url' );
+		delete_post_meta( $post_id, '_refr_clicks' );
 
 		// and do the API return
 		$ret['success'] = true;
-		$ret['message'] = __( 'You have removed your YOURLS link.', 'wprefr' );
-		$ret['linkbox'] = YOURLSCreator_Helper::get_yourls_subbox( $post_id );
+		$ret['message'] = __( 'You have removed your REFR link.', 'wprefr' );
+		$ret['linkbox'] = REFRCreator_Helper::get_refr_subbox( $post_id );
 		echo json_encode( $ret );
 		die();
 	}
@@ -242,7 +242,7 @@ class YOURLSCreator_Ajax
 	/**
 	 * retrieve stats
 	 */
-	public function stats_yourls() {
+	public function stats_refr() {
 
 		// only run on admin
 		if ( ! is_admin() ) {
@@ -253,7 +253,7 @@ class YOURLSCreator_Ajax
 		$ret = array();
 
 		// bail if the API key or URL have not been entered
-		if(	false === $api = YOURLSCreator_Helper::get_yourls_api_data() ) {
+		if(	false === $api = REFRCreator_Helper::get_refr_api_data() ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_API_DATA';
 			$ret['message'] = __( 'No API data has been entered.', 'wprefr' );
@@ -274,7 +274,7 @@ class YOURLSCreator_Ajax
 		$post_id    = absint( $_POST['post_id'] );
 
 		// verify our nonce
-		$check	= check_ajax_referer( 'yourls_inline_update_' . absint( $post_id ), 'nonce', false );
+		$check	= check_ajax_referer( 'refr_inline_update_' . absint( $post_id ), 'nonce', false );
 
 		// check to see if our nonce failed
 		if( ! $check ) {
@@ -286,7 +286,7 @@ class YOURLSCreator_Ajax
 		}
 
 		// get my click number
-		$clicks = YOURLSCreator_Helper::get_single_click_count( $post_id );
+		$clicks = REFRCreator_Helper::get_single_click_count( $post_id );
 
 		// bad API call
 		if ( empty( $clicks['success'] ) ) {
@@ -298,11 +298,11 @@ class YOURLSCreator_Ajax
 		}
 
 		// got it. update the meta
-		update_post_meta( $post_id, '_yourls_clicks', $clicks['clicknm'] );
+		update_post_meta( $post_id, '_refr_clicks', $clicks['clicknm'] );
 
 		// and do the API return
 		$ret['success'] = true;
-		$ret['message'] = __( 'Your YOURLS click count has been updated', 'wprefr' );
+		$ret['message'] = __( 'Your REFR click count has been updated', 'wprefr' );
 		$ret['clicknm'] = $clicks['clicknm'];
 		echo json_encode( $ret );
 		die();
@@ -311,7 +311,7 @@ class YOURLSCreator_Ajax
 	/**
 	 * Create shortlink function inline. Called on ajax
 	 */
-	public function inline_yourls() {
+	public function inline_refr() {
 
 		// only run on admin
 		if ( ! is_admin() ) {
@@ -322,7 +322,7 @@ class YOURLSCreator_Ajax
 		$ret = array();
 
 		// bail if the API key or URL have not been entered
-		if(	false === $api = YOURLSCreator_Helper::get_yourls_api_data() ) {
+		if(	false === $api = REFRCreator_Helper::get_refr_api_data() ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_API_DATA';
 			$ret['message'] = __( 'No API data has been entered.', 'wprefr' );
@@ -343,7 +343,7 @@ class YOURLSCreator_Ajax
 		$post_id    = absint( $_POST['post_id'] );
 
 		// bail if we aren't working with a published or scheduled post
-		if ( ! in_array( get_post_status( $post_id ), YOURLSCreator_Helper::get_yourls_status() ) ) {
+		if ( ! in_array( get_post_status( $post_id ), REFRCreator_Helper::get_refr_status() ) ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'INVALID_STATUS';
 			$ret['message'] = __( 'This is not a valid post status.', 'wprefr' );
@@ -352,7 +352,7 @@ class YOURLSCreator_Ajax
 		}
 
 		// verify our nonce
-		$check	= check_ajax_referer( 'yourls_inline_create_' . absint( $post_id ), 'nonce', false );
+		$check	= check_ajax_referer( 'refr_inline_create_' . absint( $post_id ), 'nonce', false );
 
 		// check to see if our nonce failed
 		if( ! $check ) {
@@ -364,7 +364,7 @@ class YOURLSCreator_Ajax
 		}
 
 		// do a quick check for a URL
-		if ( false !== $link = YOURLSCreator_Helper::get_yourls_meta( $post_id, '_yourls_url' ) ) {
+		if ( false !== $link = REFRCreator_Helper::get_refr_meta( $post_id, '_refr_url' ) ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'URL_EXISTS';
 			$ret['message'] = __( 'A URL already exists.', 'wprefr' );
@@ -373,7 +373,7 @@ class YOURLSCreator_Ajax
 		}
 
 		// do a quick check for a permalink
-		if ( false === $url = YOURLSCreator_Helper::prepare_api_link( $post_id ) ) {
+		if ( false === $url = REFRCreator_Helper::prepare_api_link( $post_id ) ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_PERMALINK';
 			$ret['message'] = __( 'No permalink could be retrieved.', 'wprefr' );
@@ -385,13 +385,13 @@ class YOURLSCreator_Ajax
 		$title  = get_the_title( $post_id );
 
 		// check for a keyword
-		$keywd  = YOURLSCreator_Helper::get_yourls_keyword( $post_id );
+		$keywd  = REFRCreator_Helper::get_refr_keyword( $post_id );
 
 		// set my args for the API call
 		$args   = array( 'url' => esc_url( $url ), 'title' => sanitize_text_field( $title ), 'keyword' => $keywd );
 
 		// make the API call
-		$build  = YOURLSCreator_Helper::run_yourls_api_call( 'shorturl', $args );
+		$build  = REFRCreator_Helper::run_refr_api_call( 'shorturl', $args );
 
 		// bail if empty data
 		if ( empty( $build ) ) {
@@ -418,13 +418,13 @@ class YOURLSCreator_Ajax
 			$shorturl   = esc_url( $build['data']['shorturl'] );
 
 			// update the post meta
-			update_post_meta( $post_id, '_yourls_url', $shorturl );
-			update_post_meta( $post_id, '_yourls_clicks', '0' );
+			update_post_meta( $post_id, '_refr_url', $shorturl );
+			update_post_meta( $post_id, '_refr_clicks', '0' );
 
 			// and do the API return
 			$ret['success'] = true;
-			$ret['message'] = __( 'You have created a new YOURLS link.', 'wprefr' );
-			$ret['rowactn'] = '<span class="update-yourls">' . YOURLSCreator_Helper::update_row_action( $post_id ) . '</span>';
+			$ret['message'] = __( 'You have created a new REFR link.', 'wprefr' );
+			$ret['rowactn'] = '<span class="update-refr">' . REFRCreator_Helper::update_row_action( $post_id ) . '</span>';
 			echo json_encode( $ret );
 			die();
 		}
@@ -440,7 +440,7 @@ class YOURLSCreator_Ajax
 	/**
 	 * run the status check on call
 	 */
-	public function status_yourls() {
+	public function status_refr() {
 
 		// only run on admin
 		if ( ! is_admin() ) {
@@ -451,7 +451,7 @@ class YOURLSCreator_Ajax
 		$ret = array();
 
 		// verify our nonce
-		$check	= check_ajax_referer( 'yourls_status_nonce', 'nonce', false );
+		$check	= check_ajax_referer( 'refr_status_nonce', 'nonce', false );
 
 		// check to see if our nonce failed
 		if( ! $check ) {
@@ -463,7 +463,7 @@ class YOURLSCreator_Ajax
 		}
 
 		// bail if the API key or URL have not been entered
-		if(	false === $api = YOURLSCreator_Helper::get_yourls_api_data() ) {
+		if(	false === $api = REFRCreator_Helper::get_refr_api_data() ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_API_DATA';
 			$ret['message'] = __( 'No API data has been entered.', 'wprefr' );
@@ -472,26 +472,26 @@ class YOURLSCreator_Ajax
 		}
 
 		// make the API call
-		$build  = YOURLSCreator_Helper::run_yourls_api_call( 'db-stats' );
+		$build  = REFRCreator_Helper::run_refr_api_call( 'db-stats' );
 
 		// handle the check and set it
 		$check  = ! empty( $build ) && false !== $build['success'] ? 'connect' : 'noconnect';
 
 		// set the option return
-		if ( false !== get_option( 'yourls_api_test' ) ) {
-			update_option( 'yourls_api_test', $check );
+		if ( false !== get_option( 'refr_api_test' ) ) {
+			update_option( 'refr_api_test', $check );
 		} else {
-			add_option( 'yourls_api_test', $check, null, 'no' );
+			add_option( 'refr_api_test', $check, null, 'no' );
 		}
 
 		// now get the API data
-		$data	= YOURLSCreator_Helper::get_api_status_data();
+		$data	= REFRCreator_Helper::get_api_status_data();
 
 		// check to see if no data happened
 		if( empty( $data ) ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_STATUS_DATA';
-			$ret['message'] = __( 'The status of the YOURLS API could not be determined.', 'wprefr' );
+			$ret['message'] = __( 'The status of the REFR API could not be determined.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -518,7 +518,7 @@ class YOURLSCreator_Ajax
 	/**
 	 * run update job to get click counts via manual ajax
 	 */
-	public function refresh_yourls() {
+	public function refresh_refr() {
 
 		// only run on admin
 		if ( ! is_admin() ) {
@@ -529,7 +529,7 @@ class YOURLSCreator_Ajax
 		$ret = array();
 
 		// verify our nonce
-		$check	= check_ajax_referer( 'yourls_refresh_nonce', 'nonce', false );
+		$check	= check_ajax_referer( 'refr_refresh_nonce', 'nonce', false );
 
 		// check to see if our nonce failed
 		if( ! $check ) {
@@ -541,7 +541,7 @@ class YOURLSCreator_Ajax
 		}
 
 		// bail if the API key or URL have not been entered
-		if(	false === $api = YOURLSCreator_Helper::get_yourls_api_data() ) {
+		if(	false === $api = REFRCreator_Helper::get_refr_api_data() ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_API_DATA';
 			$ret['message'] = __( 'No API data has been entered.', 'wprefr' );
@@ -549,8 +549,8 @@ class YOURLSCreator_Ajax
 			die();
 		}
 
-		// fetch the IDs that contain a YOURLS url meta key
-		if ( false === $items = YOURLSCreator_Helper::get_yourls_post_ids() ) {
+		// fetch the IDs that contain a REFR url meta key
+		if ( false === $items = REFRCreator_Helper::get_refr_post_ids() ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_POST_IDS';
 			$ret['message'] = __( 'There are no items with stored URLs.', 'wprefr' );
@@ -562,7 +562,7 @@ class YOURLSCreator_Ajax
 		foreach ( $items as $item_id ) {
 
 			// get my click number
-			$clicks = YOURLSCreator_Helper::get_single_click_count( $item_id );
+			$clicks = REFRCreator_Helper::get_single_click_count( $item_id );
 
 			// bad API call
 			if ( empty( $clicks['success'] ) ) {
@@ -574,7 +574,7 @@ class YOURLSCreator_Ajax
 			}
 
 			// got it. update the meta
-			update_post_meta( $item_id, '_yourls_clicks', $clicks['clicknm'] );
+			update_post_meta( $item_id, '_refr_clicks', $clicks['clicknm'] );
 		}
 
 		// and do the API return
@@ -587,7 +587,7 @@ class YOURLSCreator_Ajax
 	/**
 	 * convert from Ozh (and Otto's) plugin
 	 */
-	public function convert_yourls() {
+	public function convert_refr() {
 
 		// only run on admin
 		if ( ! is_admin() ) {
@@ -595,7 +595,7 @@ class YOURLSCreator_Ajax
 		}
 
 		// verify our nonce
-		$check	= check_ajax_referer( 'yourls_convert_nonce', 'nonce', false );
+		$check	= check_ajax_referer( 'refr_convert_nonce', 'nonce', false );
 
 		// check to see if our nonce failed
 		if( ! $check ) {
@@ -607,10 +607,10 @@ class YOURLSCreator_Ajax
 		}
 
 		// filter our key to replace
-		$key = apply_filters( 'yourls_key_to_convert', 'yourls_shorturl' );
+		$key = apply_filters( 'refr_key_to_convert', 'refr_shorturl' );
 
-		// fetch the IDs that contain a YOURLS url meta key
-		if ( false === $items = YOURLSCreator_Helper::get_yourls_post_ids( $key ) ) {
+		// fetch the IDs that contain a REFR url meta key
+		if ( false === $items = REFRCreator_Helper::get_refr_post_ids( $key ) ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_KEYS';
 			$ret['message'] = __( 'There are no meta keys to convert.', 'wprefr' );
@@ -627,7 +627,7 @@ class YOURLSCreator_Ajax
 			SET    meta_key = '%s'
 			WHERE  meta_key = '%s'
 			",
-			esc_sql( '_yourls_url' ), esc_sql( $key )
+			esc_sql( '_refr_url' ), esc_sql( $key )
 		);
 
 		// run SQL query
@@ -657,10 +657,10 @@ class YOURLSCreator_Ajax
 	}
 
 	/**
-	 * check the YOURLS install for existing links
+	 * check the REFR install for existing links
 	 * and pull the data if it exists
 	 */
-	public function import_yourls() {
+	public function import_refr() {
 
 		// only run on admin
 		if ( ! is_admin() ) {
@@ -668,7 +668,7 @@ class YOURLSCreator_Ajax
 		}
 
 		// verify our nonce
-		$check	= check_ajax_referer( 'yourls_import_nonce', 'nonce', false );
+		$check	= check_ajax_referer( 'refr_import_nonce', 'nonce', false );
 
 		// check to see if our nonce failed
 		if( ! $check ) {
@@ -680,7 +680,7 @@ class YOURLSCreator_Ajax
 		}
 
 		// bail if the API key or URL have not been entered
-		if(	false === $api = YOURLSCreator_Helper::get_yourls_api_data() ) {
+		if(	false === $api = REFRCreator_Helper::get_refr_api_data() ) {
 			$ret['success'] = false;
 			$ret['errcode'] = 'NO_API_DATA';
 			$ret['message'] = __( 'No API data has been entered.', 'wprefr' );
@@ -689,10 +689,10 @@ class YOURLSCreator_Ajax
 		}
 
 		// set my args for the API call
-		$args   = array( 'filter' => 'top', 'limit' => apply_filters( 'yourls_import_limit', 999 ) );
+		$args   = array( 'filter' => 'top', 'limit' => apply_filters( 'refr_import_limit', 999 ) );
 
 		// make the API call
-		$fetch  = YOURLSCreator_Helper::run_yourls_api_call( 'stats', $args );
+		$fetch  = REFRCreator_Helper::run_refr_api_call( 'stats', $args );
 
 		// bail if empty data
 		if ( empty( $fetch ) ) {
@@ -722,7 +722,7 @@ class YOURLSCreator_Ajax
 		}
 
 		// filter the incoming for matching links
-		$filter = YOURLSCreator_Helper::filter_yourls_import( $fetch['data']['links'] );
+		$filter = REFRCreator_Helper::filter_refr_import( $fetch['data']['links'] );
 
 		// bail error received
 		if ( empty( $filter ) ) {
@@ -740,7 +740,7 @@ class YOURLSCreator_Ajax
 		foreach ( $filter as $item ) {
 
 			// do the import
-			$import = YOURLSCreator_Helper::maybe_import_link( $item );
+			$import = REFRCreator_Helper::maybe_import_link( $item );
 
 			// bail error received
 			if ( empty( $import ) ) {
@@ -761,7 +761,7 @@ class YOURLSCreator_Ajax
 		// hooray. it worked. do the ajax return
 		if ( false === $error ) {
 			$ret['success'] = true;
-			$ret['message'] = __( 'All available YOURLS data has been imported.', 'wprefr' );
+			$ret['message'] = __( 'All available REFR data has been imported.', 'wprefr' );
 			echo json_encode( $ret );
 			die();
 		}
@@ -781,5 +781,5 @@ class YOURLSCreator_Ajax
 }
 
 // Instantiate our class
-new YOURLSCreator_Ajax();
+new REFRCreator_Ajax();
 
